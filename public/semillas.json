@@ -1,0 +1,27 @@
+{
+  "aviso": "Escenarios de prueba. 'valores' son los atributos de Brevo que toma el visor; 'email' es el contacto de prueba que creéis en Brevo para ese escenario (déjalo vacío si aún no existe). Aquí no pongáis emails de usuarios reales.",
+  "escenarios": [
+    { "id": "host_ib", "grupo": "Extensiones · propietarios", "nombre": "Solo reserva inmediata (IB)", "idioma": "es",
+      "valores": { "contact.HOST_HAS_IB": "true", "contact.HOST_HAS_RTB": "" }, "email": "" },
+    { "id": "host_rtb", "grupo": "Extensiones · propietarios", "nombre": "Solo bajo aceptación (RTB)", "idioma": "es",
+      "valores": { "contact.HOST_HAS_IB": "", "contact.HOST_HAS_RTB": "true" }, "email": "" },
+    { "id": "host_mixto", "grupo": "Extensiones · propietarios", "nombre": "Mixto (IB + RTB)", "idioma": "es",
+      "valores": { "contact.HOST_HAS_IB": "true", "contact.HOST_HAS_RTB": "true" }, "email": "" },
+
+    { "id": "rider_on_rent", "grupo": "Extensiones · riders", "nombre": "Alquiler en curso", "idioma": "es",
+      "valores": { "contact.CURRENT_BOOKING_STATUS": "on_rent" }, "email": "" },
+    { "id": "rider_booked", "grupo": "Extensiones · riders", "nombre": "Reserva confirmada", "idioma": "es",
+      "valores": { "contact.CURRENT_BOOKING_STATUS": "booked" }, "email": "" },
+    { "id": "rider_base", "grupo": "Extensiones · riders", "nombre": "Sin reserva activa", "idioma": "es",
+      "valores": { "contact.CURRENT_BOOKING_STATUS": "" }, "email": "" },
+    { "id": "rider_on_rent_en", "grupo": "Extensiones · riders", "nombre": "Alquiler en curso (inglés)", "idioma": "en",
+      "valores": { "contact.CURRENT_BOOKING_STATUS": "on_rent" }, "email": "" },
+
+    { "id": "busq_nuevo_saldo", "grupo": "Búsqueda abandonada", "nombre": "Usuario nuevo con saldo", "idioma": "es",
+      "valores": { "contact.SEARCH_AUDIENCE": "nuevo_con_saldo", "contact.SEARCH_IS_NEW": "true" }, "email": "" },
+    { "id": "busq_nuevo", "grupo": "Búsqueda abandonada", "nombre": "Usuario nuevo sin saldo", "idioma": "es",
+      "valores": { "contact.SEARCH_AUDIENCE": "", "contact.SEARCH_IS_NEW": "true" }, "email": "" },
+    { "id": "busq_conocido", "grupo": "Búsqueda abandonada", "nombre": "Usuario que ya conoce Momoven", "idioma": "es",
+      "valores": { "contact.SEARCH_AUDIENCE": "", "contact.SEARCH_IS_NEW": "" }, "email": "" }
+  ]
+}
