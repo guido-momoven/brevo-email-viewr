@@ -101,6 +101,15 @@ function coincide(contacto, f) {
   return a !== undefined && a !== null && String(a).toLowerCase() === v;
 }
 
+// Valores de LANGUAGE que las plantillas tratan como inglés; todo lo demás (incluido vacío) cae en la rama en español.
+const INGLES = ['en', 'en-gb', 'en-us', 'en_gb', 'en_us', 'english'];
+function esIngles(c) {
+  return INGLES.indexOf(String((c.attributes || {}).LANGUAGE || '').trim().toLowerCase()) !== -1;
+}
+function coincideIdioma(c, idioma) {
+  return idioma === 'en' ? esIngles(c) : !esIngles(c);
+}
+
 function validar(cuerpo) {
   const lista = permitidos();
   const filtros = Array.isArray(cuerpo.filtros) ? cuerpo.filtros : [];
@@ -118,9 +127,11 @@ function validar(cuerpo) {
   if (noPermitidos.length) return { error: 'Atributos no permitidos: ' + noPermitidos.join(', ') + '.', noPermitidos };
   const segmentId = cuerpo.segmentId ? Number(cuerpo.segmentId) : 0;
   if (cuerpo.segmentId && !(Number.isInteger(segmentId) && segmentId > 0 && segmentId < 1e7)) return { error: 'Segmento no válido.' };
-  if (!limpios.length && !segmentId) return { error: 'Indica al menos un filtro o un segmento.' };
+  const idioma = cuerpo.idioma === undefined || cuerpo.idioma === null || cuerpo.idioma === '' ? '' : String(cuerpo.idioma).toLowerCase();
+  if (idioma && idioma !== 'es' && idioma !== 'en') return { error: 'Idioma no válido.' };
+  if (!limpios.length && !segmentId && !idioma) return { error: 'Indica al menos un filtro, un idioma o un segmento.' };
   const max = Math.min(Math.max(parseInt(cuerpo.max, 10) || MAX_RESULTADOS, 1), MAX_RESULTADOS);
-  return { filtros: limpios, segmentId, max };
+  return { filtros: limpios, segmentId, idioma, max };
 }
 
 exports.handler = async (event) => {
@@ -163,6 +174,7 @@ exports.handler = async (event) => {
       // Se comprueban todos los filtros aquí, aunque Brevo ya haya filtrado: no dependemos de cómo combine filtro y segmento.
       contactos.forEach((c) => {
         if (c.emailBlacklisted) return;
+        if (v.idioma && !coincideIdioma(c, v.idioma)) return;
         if (v.filtros.every((x) => coincide(c, x))) encontrados.push(c);
       });
       if (contactos.length < 1000) break;
@@ -175,7 +187,7 @@ exports.handler = async (event) => {
       email: c.email,
       atributos: Object.keys(c.attributes || {}).filter((k) => lista.indexOf(k) !== -1).reduce((o, k) => { o[k] = c.attributes[k]; return o; }, {}),
     }));
-    console.log(JSON.stringify({ evento: 'consulta', atributos: v.filtros.map((f) => f.attr), segmento: v.segmentId || null, revisados, coincidencias: encontrados.length, devueltos: salida.length }));
+    console.log(JSON.stringify({ evento: 'consulta', atributos: v.filtros.map((f) => f.attr), segmento: v.segmentId || null, idioma: v.idioma || null, revisados, coincidencias: encontrados.length, devueltos: salida.length }));
     return json(200, { ok: true, contactos: salida, revisados, coincidencias: encontrados.length, truncado });
   } catch (e) {
     console.log(JSON.stringify({ evento: 'error', mensaje: String(e && e.message) }));
