@@ -154,10 +154,10 @@ code.i{font:12px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;paddin
 /* Contactos de ejemplo */
 .gtitle{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:14px 0 6px}
 .gtitle:first-child{margin-top:0}
-.ejitem{display:flex;gap:10px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fff}
+.ejitem{display:flex;flex-direction:column;gap:8px;align-items:stretch;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fff}
 .ejt{min-width:0;flex:1}
 .ejt b{font-size:13px}
-.ejb{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.ejb{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-start}
 .vchip{display:inline-block;font:11px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;color:#374151;padding:1px 7px;border-radius:6px;margin:4px 4px 0 0}
 .fchip{display:inline-block;font:700 11.5px ui-monospace,Menlo,Consolas,monospace;background:var(--peach-bg);border:1px solid var(--peach);color:#7A4A0B;padding:3px 9px;border-radius:999px;margin:0 6px 6px 0}
 .sep2{height:1px;background:#F0F0F0;margin:18px 0 14px}
@@ -866,6 +866,13 @@ function pintarBusqueda(){
   $('#ejResumen').innerHTML='Buscará contactos con: '+chips.join('');
   $('#ejBuscar').disabled=false;
 }
+// Atributos del correo: los únicos que se piden y se enseñan de cada contacto
+function atributosDelCorreo(){
+  var out=[],meta=state.meta||{};
+  Object.keys(meta).forEach(function(n){if(n.indexOf('contact.')===0) out.push(n.slice(8));});
+  if(/contact\.LANGUAGE/.test($('#src').value)&&out.indexOf('LANGUAGE')===-1) out.push('LANGUAGE');
+  return out;
+}
 function msgBrevo(t){$('#ejRes').innerHTML='<div class="ejmsg">'+esc(t)+'</div>';}
 
 function pedirPassword(error,despues){
@@ -898,7 +905,7 @@ function pintarContactos(j){
   if(!ultimos.length){msgBrevo('No hay contactos que cumplan esas condiciones entre los '+j.revisados+' revisados.'+(j.truncado?' Solo se han revisado los más recientes.':''));return;}
   $('#ejRes').innerHTML='<p class="hint" style="margin:12px 0 8px">'+ultimos.length+' de '+j.coincidencias+' coincidencia(s) entre '+j.revisados+' contactos revisados'+(j.truncado?' (solo los más recientes)':'')+'.</p>'+
     ultimos.map(function(c,i){
-      return '<div class="ejitem"><div class="ejt"><b>#'+esc(c.id)+' · '+esc(mascara(c.email))+'</b><div>'+chipsValores(valoresDeContacto(c))+'</div></div>'+
+      return '<div class="ejitem"><div class="ejt"><b>#'+esc(c.id)+' · '+esc(mascara(c.email))+'</b><div>'+(chipsValores(valoresDeContacto(c))||'<span class="hint">Sin atributos que use este correo</span>')+'</div></div>'+
         '<div class="ejb"><button class="ghost dark" data-cv="'+i+'">Ver con sus datos</button><button class="ghost" data-cm="'+i+'">Copiar email</button></div></div>';
     }).join('');
 }
@@ -912,7 +919,7 @@ function buscarContactos(){
   var fil=filtrosActuales();
   if(!getPw()){pedirPassword('',buscarContactos);return;}
   $('#ejRes').innerHTML='<p class="hint" style="margin-top:12px">Buscando en Brevo…</p>';$('#ejBuscar').disabled=true;
-  fetch('/api/contactos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:getPw(),idioma:state.lang,filtros:fil,max:3})})
+  fetch('/api/contactos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:getPw(),idioma:state.lang,filtros:fil,mostrar:atributosDelCorreo(),max:3})})
     .then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {status:r.status,j:j};});})
     .then(function(x){
       pintarBusqueda();
