@@ -70,7 +70,6 @@ aside{display:flex;flex-direction:column;gap:16px;position:sticky;top:76px;max-h
 .sw input:checked+.slider{background:var(--accent)}
 .sw input:checked+.slider::after{transform:translateX(16px)}
 .sw input:focus-visible+.slider{outline:2px solid var(--accent);outline-offset:2px}
-#presets{display:none;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .debug{margin-top:14px;background:#FAFAFA;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .debug b{display:block;font-size:12px;margin-bottom:6px}
 .debug code{display:block;font:11px/1.6 ui-monospace,Menlo,Consolas,monospace;color:#374151;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px;overflow-wrap:anywhere}
@@ -160,7 +159,10 @@ code.i{font:12px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;paddin
 .ejt b{font-size:13px}
 .ejb{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .vchip{display:inline-block;font:11px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;color:#374151;padding:1px 7px;border-radius:6px;margin:4px 4px 0 0}
-.fchip{display:inline-block;font:700 11.5px ui-monospace,Menlo,Consolas,monospace;background:var(--peach-bg);border:1px solid var(--peach);color:#7A4A0B;padding:3px 9px;border-radius:999px;margin:0 6px 6px 0;cursor:pointer;user-select:none}
+.fchip{display:inline-block;font:700 11.5px ui-monospace,Menlo,Consolas,monospace;background:var(--peach-bg);border:1px solid var(--peach);color:#7A4A0B;padding:3px 9px;border-radius:999px;margin:0 6px 6px 0}
+.sep2{height:1px;background:#F0F0F0;margin:18px 0 14px}
+#ejResumen{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+#ejBuscar:disabled{opacity:.45;cursor:not-allowed}
 .fchip.off{background:#F3F4F6;border-color:var(--line);color:var(--faint);text-decoration:line-through}
 .ejmsg{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--warn-bg);border:1px solid #F2D48A;font-size:12.5px}
 .mini{font-size:12px;font-weight:700;margin:12px 0 6px;display:block}
@@ -174,6 +176,34 @@ code.i{font:12px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;paddin
 .pwbox input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;margin-top:12px}
 .pwbox input:focus{border-color:var(--accent);outline:none}
 #pwErr{color:#B42318;font-size:12.5px;min-height:18px;margin-top:6px;font-weight:600}
+
+/* Pantallas pequeñas: parámetros, mail y el resto en este orden, y cabecera compacta */
+html{-webkit-text-size-adjust:100%}
+.mhead{flex-wrap:nowrap;align-items:flex-start}
+.mhead>div:first-child{min-width:0;flex:1}
+@media (max-width:1000px){
+  main{display:flex;flex-direction:column;gap:16px;padding:16px}
+  aside,section.right{display:contents}
+  #attrCard{order:1}
+  .chrome{order:2}
+  .canvas{order:3}
+  #spCard{order:4}
+  #phCard{order:5}
+  #srcCard{order:6}
+  #reviewCard{order:7}
+  .chrome,.canvas,#reviewCard{align-self:center;width:100%;max-width:600px;margin-top:0}
+  .right.phone .chrome{margin-bottom:0}
+}
+@media (max-width:760px){
+  header{position:static}
+  .bar{padding:10px 16px;gap:8px}
+  .brand .sep,.brand .pill{display:none}
+  #devSeg,#zoomSeg{display:none!important}
+  .cta{padding:8px 12px;font-size:12.5px}
+  .msec-h{flex-wrap:wrap}
+  .mbox{max-height:92vh}
+  .mhead{padding:14px 16px}
+}
 
 /* Toast */
 #toast{position:fixed;right:20px;bottom:20px;background:#1A1A1A;color:#fff;font-size:12px;font-weight:700;padding:12px 16px;border-radius:12px;border:1px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.25);transform:translateY(80px);opacity:0;transition:all .3s;z-index:60}
@@ -195,7 +225,7 @@ code.i{font:12px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;paddin
         <button data-lang="es" class="on">ES</button>
         <button data-lang="en">EN</button>
       </div>
-      <div class="seg" role="group" aria-label="Dispositivo">
+      <div class="seg" id="devSeg" role="group" aria-label="Dispositivo">
         <button data-device="desktop" class="on">Escritorio 600px</button>
         <button data-device="mobile">Móvil 390px</button>
       </div>
@@ -211,34 +241,19 @@ code.i{font:12px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;paddin
 
 <main>
   <aside>
-    <div class="card">
+    <div class="card" id="attrCard">
       <div class="card-h"><span class="t">Atributos Brevo</span><span class="badge" id="attrCount">0 detectados</span></div>
-      <div id="presets">
-        <button class="ghost" id="pNew">Usuario nuevo con saldo</button>
-        <button class="ghost" id="pKnown">Usuario que ya conoce</button>
-      </div>
       <div id="attrs"><p class="hint">Los controles aparecen solos cuando pegas un HTML con variables de Brevo.</p></div>
       <div class="debug" id="debugBox" style="display:none"><b>Evaluación en Brevo:</b><code id="debug"></code></div>
       <div class="row"><button class="ghost" id="resetVals">Restablecer valores de prueba</button></div>
-    </div>
 
-    <div class="card" id="ejCard">
-      <div class="card-h">
-        <span class="t">Contactos de ejemplo</span>
-        <div class="seg" role="group" aria-label="Origen de los contactos">
-          <button class="on" data-ej="semillas">Escenarios</button>
-          <button data-ej="brevo">En Brevo</button>
-        </div>
-      </div>
-      <div id="ejSemillas"></div>
       <div id="ejBrevo" style="display:none">
-        <p class="hint" id="ejAviso" style="margin-bottom:12px">Busca en Brevo contactos reales que cumplan las condiciones elegidas en «Atributos Brevo». Pide la contraseña de equipo.</p>
-        <div id="ejFiltros"></div>
-        <label for="ejSeg" class="mini">Segmento de Brevo (opcional)</label>
-        <input type="text" id="ejSeg" inputmode="numeric" placeholder="Ej: 79" autocomplete="off">
-        <div class="row"><button class="cta" id="ejBuscar" style="width:auto;margin:0">Buscar contactos</button><button class="ghost" id="ejSalir" style="display:none">Cerrar sesión</button></div>
+        <div class="sep2"></div>
+        <div class="gtitle">Contactos reales en Brevo</div>
+        <div id="ejResumen"></div>
+        <div class="row"><button class="cta" id="ejBuscar" style="width:100%;margin:0">Buscar contactos en Brevo</button></div>
         <div id="ejRes"></div>
-        <p class="hint" style="margin-top:12px">Son datos reales: no hagas capturas con los emails ni los compartas. Aquí no se guardan.</p>
+        <div class="row" style="margin-top:10px"><button class="ghost" id="ejSalir" style="display:none">Cerrar sesión</button></div>
       </div>
     </div>
 
@@ -263,7 +278,7 @@ code.i{font:12px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;paddin
       <p class="hint">Cada hueco entre corchetes se detecta solo. Admite HTML básico como &lt;strong&gt;.</p>
     </div>
 
-    <div class="card">
+    <div class="card" id="srcCard">
       <details class="src" id="srcBox" open>
         <summary>HTML fuente</summary>
         <textarea id="src" spellcheck="false" placeholder="Pega aquí el HTML completo, con las condiciones {% if %} de Brevo."></textarea>
@@ -314,6 +329,7 @@ code.i{font:12px ui-monospace,Menlo,Consolas,monospace;background:#F3F4F6;paddin
     <div class="mcode" id="mcode"></div>
   </div>
 </div>
+<iframe id="medir" title="" aria-hidden="true" tabindex="-1" sandbox="allow-same-origin" style="position:absolute;left:-9999px;top:0;width:390px;height:20px;border:0;visibility:hidden"></iframe>
 <div id="pwModal" role="dialog" aria-modal="true" aria-labelledby="pwT">
   <div class="pwbox">
     <h3 id="pwT">Contraseña de equipo</h3>
@@ -529,7 +545,6 @@ function buildAttrs(meta){
   var names=Object.keys(meta);
   var sig=names.map(function(n){return n+':'+ctype(meta[n])+':'+meta[n].lits.join(',');}).join('|');
   $('#attrCount').textContent=names.length+(names.length===1?' detectado':' detectados');
-  $('#presets').style.display=(meta['contact.SEARCH_AUDIENCE']||meta['contact.SEARCH_IS_NEW'])?'flex':'none';
   $('#debugBox').style.display=names.length?'block':'none';
   if(sig===state.attrSig) return;
   state.attrSig=sig;
@@ -709,7 +724,7 @@ function later(){clearTimeout(timer);timer=setTimeout(update,180);}
 
 // Vista móvil: marco de teléfono ampliable
 function applyDevice(){
-  var phone=state.device==='mobile';
+  var phone=state.device==='mobile'&&window.innerWidth>760;
   var right=$('#right'),c=$('#canvas');
   right.classList.toggle('phone',phone);
   $('#zoomSeg').style.display=phone?'inline-flex':'none';
@@ -750,8 +765,6 @@ document.querySelectorAll('[data-zoom]').forEach(function(b){b.addEventListener(
   document.querySelectorAll('[data-zoom]').forEach(function(x){x.classList.toggle('on',x===b);});
   applyDevice();
 });});
-$('#pNew').addEventListener('click',function(){state.vals['contact.SEARCH_AUDIENCE']='nuevo_con_saldo';state.vals['contact.SEARCH_IS_NEW']='true';update();});
-$('#pKnown').addEventListener('click',function(){state.vals['contact.SEARCH_AUDIENCE']='';state.vals['contact.SEARCH_IS_NEW']='';update();});
 $('#resetVals').addEventListener('click',function(){state.vals={};update();toast('Valores de prueba restablecidos');});
 $('#openFile').addEventListener('click',function(){$('#file').click();});
 $('#file').addEventListener('change',function(e){
@@ -799,9 +812,8 @@ $('#mcode').addEventListener('click',function(e){
 });
 window.addEventListener('resize',function(){fit();if(state.device==='mobile') applyDevice();});
 
-/* ---------- Contactos de ejemplo ---------- */
-var SEMILLAS_DEFECTO=[{"id": "host_ib", "grupo": "Extensiones · propietarios", "nombre": "Solo reserva inmediata (IB)", "idioma": "es", "valores": {"contact.HOST_HAS_IB": "true", "contact.HOST_HAS_RTB": ""}, "email": ""}, {"id": "host_rtb", "grupo": "Extensiones · propietarios", "nombre": "Solo bajo aceptación (RTB)", "idioma": "es", "valores": {"contact.HOST_HAS_IB": "", "contact.HOST_HAS_RTB": "true"}, "email": ""}, {"id": "host_mixto", "grupo": "Extensiones · propietarios", "nombre": "Mixto (IB + RTB)", "idioma": "es", "valores": {"contact.HOST_HAS_IB": "true", "contact.HOST_HAS_RTB": "true"}, "email": ""}, {"id": "rider_on_rent", "grupo": "Extensiones · riders", "nombre": "Alquiler en curso", "idioma": "es", "valores": {"contact.CURRENT_BOOKING_STATUS": "on_rent"}, "email": ""}, {"id": "rider_booked", "grupo": "Extensiones · riders", "nombre": "Reserva confirmada", "idioma": "es", "valores": {"contact.CURRENT_BOOKING_STATUS": "booked"}, "email": ""}, {"id": "rider_base", "grupo": "Extensiones · riders", "nombre": "Sin reserva activa", "idioma": "es", "valores": {"contact.CURRENT_BOOKING_STATUS": ""}, "email": ""}, {"id": "rider_on_rent_en", "grupo": "Extensiones · riders", "nombre": "Alquiler en curso (inglés)", "idioma": "en", "valores": {"contact.CURRENT_BOOKING_STATUS": "on_rent"}, "email": ""}, {"id": "busq_nuevo_saldo", "grupo": "Búsqueda abandonada", "nombre": "Usuario nuevo con saldo", "idioma": "es", "valores": {"contact.SEARCH_AUDIENCE": "nuevo_con_saldo", "contact.SEARCH_IS_NEW": "true"}, "email": ""}, {"id": "busq_nuevo", "grupo": "Búsqueda abandonada", "nombre": "Usuario nuevo sin saldo", "idioma": "es", "valores": {"contact.SEARCH_AUDIENCE": "", "contact.SEARCH_IS_NEW": "true"}, "email": ""}, {"id": "busq_conocido", "grupo": "Búsqueda abandonada", "nombre": "Usuario que ya conoce Momoven", "idioma": "es", "valores": {"contact.SEARCH_AUDIENCE": "", "contact.SEARCH_IS_NEW": ""}, "email": ""}];
-var semillas=[], excluidos=[], ultimos=[], pwCallback=null, pwMemoria='';
+/* ---------- Buscar contactos reales en Brevo (al final de los parámetros) ---------- */
+var ultimos=[], pwCallback=null, pwMemoria='';
 
 function getPw(){var v='';try{v=sessionStorage.getItem('mm_pw')||'';}catch(e){}return v||pwMemoria;}
 function setPw(v){pwMemoria=v;try{if(v) sessionStorage.setItem('mm_pw',v); else sessionStorage.removeItem('mm_pw');}catch(e){}$('#ejSalir').style.display=v?'inline-block':'none';}
@@ -815,43 +827,13 @@ function aplicarValores(valores,idioma){
   }
   update();
 }
-
-// Escenarios (contactos semilla)
 function chipsValores(v){
   return Object.keys(v).map(function(k){
     return '<span class="vchip">'+esc(k.replace(/^(contact|params)\./,''))+' = '+(v[k]===''?'vacío':esc(v[k]))+'</span>';
   }).join('');
 }
-function pintarSemillas(){
-  var grupos={},orden=[];
-  semillas.forEach(function(s,i){var g=s.grupo||'Otros'; if(!grupos[g]){grupos[g]=[];orden.push(g);} grupos[g].push([s,i]);});
-  $('#ejSemillas').innerHTML=orden.map(function(g){
-    return '<div class="gtitle">'+esc(g)+'</div>'+grupos[g].map(function(p){
-      var s=p[0],i=p[1];
-      return '<div class="ejitem"><div class="ejt"><b>'+esc(s.nombre)+'</b><div>'+chipsValores(s.valores||{})+(s.idioma?'<span class="vchip">idioma = '+esc(String(s.idioma).toUpperCase())+'</span>':'')+'</div>'+
-        (s.email?'<div class="hint" style="margin-top:4px">Contacto de prueba en Brevo: <b>'+esc(s.email)+'</b></div>':'')+'</div>'+
-        '<div class="ejb"><button class="ghost dark" data-sem="'+i+'">Cargar</button>'+(s.email?'<button class="ghost" data-semmail="'+i+'">Copiar email</button>':'')+'</div></div>';
-    }).join('');
-  }).join('')||'<p class="hint">Sin escenarios.</p>';
-}
-function cargarSemillas(){
-  fetch('semillas.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():Promise.reject();})
-    .then(function(j){semillas=j.escenarios||[];pintarSemillas();})
-    .catch(function(){semillas=SEMILLAS_DEFECTO;pintarSemillas();});
-}
-$('#ejSemillas').addEventListener('click',function(e){
-  var b=e.target.closest('[data-sem]'),m=e.target.closest('[data-semmail]');
-  if(b){var s=semillas[b.dataset.sem];aplicarValores(s.valores||{},s.idioma);toast('Escenario cargado: '+s.nombre);}
-  if(m){copyText(semillas[m.dataset.semmail].email,'Email copiado');}
-});
-document.querySelectorAll('[data-ej]').forEach(function(b){b.addEventListener('click',function(){
-  document.querySelectorAll('[data-ej]').forEach(function(x){x.classList.toggle('on',x===b);});
-  $('#ejSemillas').style.display=b.dataset.ej==='semillas'?'block':'none';
-  $('#ejBrevo').style.display=b.dataset.ej==='brevo'?'block':'none';
-  if(b.dataset.ej==='brevo') pintarFiltros();
-});});
 
-// Búsqueda en Brevo (pide contraseña)
+// Condiciones = los parámetros del correo que tienen un valor elegido (opciones) o están activados (interruptores)
 function filtrosActuales(){
   var out=[],meta=state.meta||{};
   Object.keys(meta).forEach(function(n){
@@ -862,19 +844,16 @@ function filtrosActuales(){
   });
   return out;
 }
-function pintarFiltros(){
-  var f=filtrosActuales(),box=$('#ejFiltros');
-  excluidos=excluidos.filter(function(a){return f.some(function(x){return x.attr===a;});});
-  box.innerHTML=f.length?f.map(function(x){
-    var off=excluidos.indexOf(x.attr)!==-1;
-    return '<span class="fchip'+(off?' off':'')+'" data-fx="'+esc(x.attr)+'" role="button" tabindex="0" title="'+(off?'Volver a incluir':'Quitar')+' esta condición">'+esc(x.attr)+' = '+esc(x.valor)+(off?'':' ×')+'</span>';
-  }).join(''):'<p class="hint">Elige valores en «Atributos Brevo» (opciones o interruptores activados) y aparecerán aquí como condiciones.</p>';
+function pintarBusqueda(){
+  var hay=Object.keys(state.meta||{}).length>0;
+  $('#ejBrevo').style.display=hay?'block':'none';
+  if(!hay) return;
+  var f=filtrosActuales();
+  $('#ejResumen').innerHTML=f.length
+    ? 'Buscará contactos con: '+f.map(function(x){return '<span class="fchip">'+esc(x.attr)+' = '+esc(x.valor)+'</span>';}).join('')
+    : 'Elige un valor o activa algún interruptor de los parámetros para poder buscar.';
+  $('#ejBuscar').disabled=!f.length;
 }
-$('#ejFiltros').addEventListener('click',function(e){
-  var c=e.target.closest('[data-fx]'); if(!c) return;
-  var a=c.dataset.fx,i=excluidos.indexOf(a); if(i===-1) excluidos.push(a); else excluidos.splice(i,1);
-  pintarFiltros();
-});
 function msgBrevo(t){$('#ejRes').innerHTML='<div class="ejmsg">'+esc(t)+'</div>';}
 
 function pedirPassword(error,despues){
@@ -918,28 +897,48 @@ $('#ejRes').addEventListener('click',function(e){
 });
 function buscarContactos(){
   if(location.protocol==='file:'){msgBrevo('Esta búsqueda solo funciona en la versión publicada en Netlify, no con el archivo abierto en local.');return;}
+  var fil=filtrosActuales();
+  if(!fil.length){pintarBusqueda();return;}
   if(!getPw()){pedirPassword('',buscarContactos);return;}
-  var fil=filtrosActuales().filter(function(f){return excluidos.indexOf(f.attr)===-1;});
-  var seg=$('#ejSeg').value.trim();
-  if(!fil.length&&!seg){msgBrevo('Elige al menos una condición o indica un segmento.');return;}
   $('#ejRes').innerHTML='<p class="hint" style="margin-top:12px">Buscando en Brevo…</p>';$('#ejBuscar').disabled=true;
-  fetch('/api/contactos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:getPw(),filtros:fil,segmentId:seg||undefined,max:5})})
+  fetch('/api/contactos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:getPw(),filtros:fil,max:3})})
     .then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {status:r.status,j:j};});})
     .then(function(x){
-      $('#ejBuscar').disabled=false;
+      pintarBusqueda();
       if(x.status===401){setPw('');$('#ejRes').innerHTML='';pedirPassword('Contraseña incorrecta.',buscarContactos);return;}
       if(x.status!==200){msgBrevo(x.j.error||'No se ha podido buscar.');return;}
       $('#ejSalir').style.display='inline-block';
       pintarContactos(x.j);
     })
-    .catch(function(){$('#ejBuscar').disabled=false;msgBrevo('No se ha podido conectar con la función.');});
+    .catch(function(){pintarBusqueda();msgBrevo('No se ha podido conectar con la función.');});
 }
 $('#ejBuscar').addEventListener('click',buscarContactos);
 
-// El panel de condiciones se mantiene al día con el visor
+// ¿Cabe el mail en un móvil de 390 px? Se mide en un marco oculto y se añade a la revisión
+var medirToken=0;
+function medirAncho(html){
+  var t=++medirToken,f=$('#medir');
+  function medir(){
+    if(t!==medirToken) return;
+    var w=0;
+    try{var d=f.contentDocument;w=Math.max(d.documentElement.scrollWidth,d.body?d.body.scrollWidth:0);}catch(e){return;}
+    var extra=w-390,mal=extra>1;
+    var el=document.createElement('div');el.className='check';el.id='chkAncho';
+    el.innerHTML='<span class="tag '+(mal?'warn':'ok')+'">'+(mal?'Revisar':'OK')+'</span><div><h3>'+(mal?'En móvil (390 px) el mail se sale '+extra+' px por la derecha':'Cabe en móvil (390 px)')+'</h3></div>';
+    var prev=$('#chkAncho');if(prev) prev.remove();
+    $('#checks').appendChild(el);
+  }
+  f.onload=function(){medir();setTimeout(medir,700);};
+  f.srcdoc=html;
+}
+
+// Los parámetros, la búsqueda y la medición se mantienen al día con el visor
 var updateOriginal=update;
-update=function(){updateOriginal();pintarFiltros();};
-cargarSemillas();
+update=function(){
+  updateOriginal();
+  pintarBusqueda();
+  if($('#src').value.trim()&&state.out) medirAncho(safeRender(state.out.html,(function(){var c={};Object.keys(state.vals).forEach(function(k){c[k]=state.vals[k];});c['contact.LANGUAGE']=state.lang==='en'?'en':'es';return c;})()));
+};
 
 try{
   var saved=JSON.parse(localStorage.getItem('momoven_visor')||'null');
