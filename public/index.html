@@ -306,7 +306,7 @@ html{-webkit-text-size-adjust:100%}
     <div class="canvas" id="canvas">
       <div class="notch"></div>
       <div id="empty">Aquí verás el mail cuando pegues el HTML.</div>
-      <iframe id="frame" title="Vista previa del mail" sandbox="allow-same-origin allow-popups" style="display:none"></iframe>
+      <iframe id="frame" title="Vista previa del mail" sandbox="allow-same-origin allow-popups" scrolling="no" style="display:none"></iframe>
     </div>
     <div class="card review" id="reviewCard">
       <div class="card-h"><span class="t">Revisión rápida</span></div>
@@ -543,13 +543,16 @@ function ensureDefaults(meta){
 
 function buildAttrs(meta){
   var names=Object.keys(meta);
-  var sig=names.map(function(n){return n+':'+ctype(meta[n])+':'+meta[n].lits.join(',');}).join('|');
+  var fuente=$('#src').value, sig=(fuente.trim()?'h':'v')+(/contact\.LANGUAGE/.test(fuente)?'L':'')+'|'+names.map(function(n){return n+':'+ctype(meta[n])+':'+meta[n].lits.join(',');}).join('|');
   $('#attrCount').textContent=names.length+(names.length===1?' detectado':' detectados');
   $('#debugBox').style.display=names.length?'block':'none';
   if(sig===state.attrSig) return;
   state.attrSig=sig;
   var box=$('#attrs'); box.innerHTML='';
-  if(!names.length){box.innerHTML='<p class="hint">Este HTML no usa variables de Brevo.</p>';return;}
+  if(!names.length){
+    box.innerHTML='<p class="hint">'+(!fuente.trim()?'Los controles aparecen solos cuando pegas un HTML con variables de Brevo.':/contact\.LANGUAGE/.test(fuente)?'Este correo solo cambia con el idioma (ES / EN): no tiene más parámetros.':'Este HTML no usa variables de Brevo.')+'</p>';
+    return;
+  }
   names.forEach(function(n,idx){
     var m=meta[n],t=ctype(m),short=n.replace(/^(contact|params)\./,''),pref=n.split('.')[0];
     var w=document.createElement('div'); w.className='attr'; w.dataset.var=n; w.dataset.type=t;
@@ -695,8 +698,17 @@ function update(){
 
   $('#empty').style.display='none';
   var f=$('#frame'); f.style.display='block';
-  f.onload=function(){fit();setTimeout(fit,400);setTimeout(fit,1500);};
-  f.srcdoc=html.indexOf('<head')!==-1?html.replace(/<head([^>]*)>/i,'<head$1><base target="_blank">'):'<base target="_blank">'+html;
+  f.onload=function(){
+    fit();setTimeout(fit,400);setTimeout(fit,1500);
+    try{
+      var d=f.contentDocument;
+      if(window.ResizeObserver) new ResizeObserver(fit).observe(d.documentElement);
+      if(d.fonts&&d.fonts.ready) d.fonts.ready.then(fit);
+      d.querySelectorAll('img').forEach(function(im){im.addEventListener('load',fit);});
+    }catch(e){}
+  };
+  var ayuda='<base target="_blank"><style>html{overflow-y:hidden!important}</style>';
+  f.srcdoc=html.indexOf('<head')!==-1?html.replace(/<head([^>]*)>/i,'<head$1>'+ayuda):ayuda+html;
 
   var doc=new DOMParser().parseFromString(html,'text/html');
   var title=oneLine(doc.title||'');
@@ -845,14 +857,14 @@ function filtrosActuales(){
   return out;
 }
 function pintarBusqueda(){
-  var hay=Object.keys(state.meta||{}).length>0;
+  var hay=$('#src').value.trim().length>0;
   $('#ejBrevo').style.display=hay?'block':'none';
   if(!hay) return;
-  var f=filtrosActuales();
-  $('#ejResumen').innerHTML=f.length
-    ? 'Buscará contactos con: '+f.map(function(x){return '<span class="fchip">'+esc(x.attr)+' = '+esc(x.valor)+'</span>';}).join('')
-    : 'Elige un valor o activa algún interruptor de los parámetros para poder buscar.';
-  $('#ejBuscar').disabled=!f.length;
+  var chips=['<span class="fchip">Idioma = '+state.lang.toUpperCase()+'</span>'].concat(filtrosActuales().map(function(x){
+    return '<span class="fchip">'+esc(x.attr)+' = '+esc(x.valor)+'</span>';
+  }));
+  $('#ejResumen').innerHTML='Buscará contactos con: '+chips.join('');
+  $('#ejBuscar').disabled=false;
 }
 function msgBrevo(t){$('#ejRes').innerHTML='<div class="ejmsg">'+esc(t)+'</div>';}
 
@@ -898,10 +910,9 @@ $('#ejRes').addEventListener('click',function(e){
 function buscarContactos(){
   if(location.protocol==='file:'){msgBrevo('Esta búsqueda solo funciona en la versión publicada en Netlify, no con el archivo abierto en local.');return;}
   var fil=filtrosActuales();
-  if(!fil.length){pintarBusqueda();return;}
   if(!getPw()){pedirPassword('',buscarContactos);return;}
   $('#ejRes').innerHTML='<p class="hint" style="margin-top:12px">Buscando en Brevo…</p>';$('#ejBuscar').disabled=true;
-  fetch('/api/contactos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:getPw(),filtros:fil,max:3})})
+  fetch('/api/contactos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:getPw(),idioma:state.lang,filtros:fil,max:3})})
     .then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {status:r.status,j:j};});})
     .then(function(x){
       pintarBusqueda();
