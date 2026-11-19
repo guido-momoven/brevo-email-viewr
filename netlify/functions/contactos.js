@@ -11,6 +11,7 @@
  * Qué hace y qué no:
  *   - Solo responde a POST con la contraseña correcta.
  *   - Solo consulta atributos de la lista PERMITIDOS (nunca NOMBRE, teléfono ni nada personal más allá del email).
+ *   - Solo devuelve los atributos que el correo usa (campo «mostrar»); sin él, ninguno.
  *   - Devuelve como máximo 3 contactos, sin los dados de baja de email.
  *   - No guarda nada. Los registros solo dicen qué atributos se consultaron y cuántos contactos salieron.
  */
@@ -131,7 +132,11 @@ function validar(cuerpo) {
   if (idioma && idioma !== 'es' && idioma !== 'en') return { error: 'Idioma no válido.' };
   if (!limpios.length && !segmentId && !idioma) return { error: 'Indica al menos un filtro, un idioma o un segmento.' };
   const max = Math.min(Math.max(parseInt(cuerpo.max, 10) || MAX_RESULTADOS, 1), MAX_RESULTADOS);
-  return { filtros: limpios, segmentId, idioma, max };
+  const mostrar = (Array.isArray(cuerpo.mostrar) ? cuerpo.mostrar : [])
+    .map((a) => String(a).toUpperCase())
+    .filter((a) => /^[A-Z0-9_]{2,40}$/.test(a) && lista.indexOf(a) !== -1)
+    .slice(0, 20);
+  return { filtros: limpios, segmentId, idioma, mostrar, max };
 }
 
 exports.handler = async (event) => {
@@ -181,11 +186,11 @@ exports.handler = async (event) => {
       if (p === PAGINAS_MAX - 1) truncado = true;
       if (encontrados.length >= v.max * 20) break;
     }
-    const lista = permitidos();
     const salida = encontrados.slice(0, v.max).map((c) => ({
       id: c.id,
       email: c.email,
-      atributos: Object.keys(c.attributes || {}).filter((k) => lista.indexOf(k) !== -1).reduce((o, k) => { o[k] = c.attributes[k]; return o; }, {}),
+      atributos: v.mostrar.filter((k) => (c.attributes || {})[k] !== undefined && (c.attributes || {})[k] !== null)
+        .reduce((o, k) => { o[k] = c.attributes[k]; return o; }, {}),
     }));
     console.log(JSON.stringify({ evento: 'consulta', atributos: v.filtros.map((f) => f.attr), segmento: v.segmentId || null, idioma: v.idioma || null, revisados, coincidencias: encontrados.length, devueltos: salida.length }));
     return json(200, { ok: true, contactos: salida, revisados, coincidencias: encontrados.length, truncado });
