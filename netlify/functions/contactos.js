@@ -11,7 +11,7 @@
  * Qué hace y qué no:
  *   - Solo responde a POST con la contraseña correcta.
  *   - Solo consulta atributos de la lista PERMITIDOS (nunca NOMBRE, teléfono ni nada personal más allá del email).
- *   - Devuelve como máximo 10 contactos, sin los dados de baja de email.
+ *   - Devuelve como máximo 3 contactos, sin los dados de baja de email.
  *   - No guarda nada. Los registros solo dicen qué atributos se consultaron y cuántos contactos salieron.
  */
 const crypto = require('crypto');
@@ -24,7 +24,7 @@ const PERMITIDOS = [
   'SEARCH_IS_NEW', 'SEARCH_VARIANT',
 ];
 const PAGINAS_MAX = 2;          // 2 páginas de 1.000 contactos como máximo
-const MAX_RESULTADOS = 10;
+const MAX_RESULTADOS = 3;
 const FALLOS_MAX = 5;           // intentos de contraseña fallidos...
 const VENTANA_MS = 10 * 60e3;   // ...en 10 minutos, por IP (mejor esfuerzo: la memoria de la función se reinicia)
 const fallos = new Map();
@@ -119,7 +119,7 @@ function validar(cuerpo) {
   const segmentId = cuerpo.segmentId ? Number(cuerpo.segmentId) : 0;
   if (cuerpo.segmentId && !(Number.isInteger(segmentId) && segmentId > 0 && segmentId < 1e7)) return { error: 'Segmento no válido.' };
   if (!limpios.length && !segmentId) return { error: 'Indica al menos un filtro o un segmento.' };
-  const max = Math.min(Math.max(parseInt(cuerpo.max, 10) || 5, 1), MAX_RESULTADOS);
+  const max = Math.min(Math.max(parseInt(cuerpo.max, 10) || MAX_RESULTADOS, 1), MAX_RESULTADOS);
   return { filtros: limpios, segmentId, max };
 }
 
