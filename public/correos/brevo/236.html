@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <title>Descubre la oferta de la semana | Momoven</title>
+
+  <!-- Asunto: 🔥 Descubre la oferta de la semana -->
+  <!-- Preencabezado: Esta semana tenemos algo especial esperándote... en Instagram. -->
+
+  <!--
+    ===================================================================
+    PLANTILLA: OFERTA DE LA SEMANA (mecánica email + Instagram)
+    Se envía periódicamente (p.ej. cada semana). El correo NO desvela la oferta:
+    solo teaser + CTA hacia el Instagram de Momoven, donde se publica la oferta
+    en carrusel (+ story enlazando a ese carrusel). Objetivo: llevar tráfico
+    medible del email al perfil de Instagram.
+
+    NOTA DE DISEÑO: a diferencia de las 3 plantillas transaccionales (solicitud,
+    valoración positiva y negativa, que son fondo oscuro), esta es una campaña de
+    difusión, así que usa el "modo claro" del sistema: fondo blanco, el naranja
+    como bloque protagonista (no solo como acento) y un panel oscuro para el CTA.
+    Mismo logo, misma tipografía y mismo estilo de botón que las transaccionales,
+    para que se note que es la misma marca en un tono distinto. El color-scheme
+    se fija en "light" (no "light dark") para que los clientes de correo no
+    intenten reinvertir estos colores en modo oscuro del dispositivo.
+
+    CAMPOS QUE HAY QUE SUSTITUIR CADA SEMANA:
+    1. {{ contact.NOMBRE }}            -> nombre del cliente (ya funciona igual que en las otras plantillas)
+    2. [SUSTITUIR-IMAGEN-SEMANA]       -> imagen teaser de esta semana (ver BLOQUE 2 más abajo).
+       Ahora mismo hay una imagen de marcador de posición (placehold.co) en su lugar,
+       solo para que veas el hueco que debe ocupar. Sustitúyela por una imagen real
+       (recorte/blur del carrusel, o un gráfico tipo "?") antes de enviar.
+       Tamaño recomendado: 536 x 340 px (o proporción similar), para que ocupe
+       todo el ancho del correo.
+
+    CAMPOS QUE NO HAY QUE TOCAR (mecánica fija):
+    - Enlace de Instagram: https://www.instagram.com/momoven/?utm_source=newsletter&utm_medium=email&utm_campaign=oferta_semana
+      Lleva UTM para poder ver en Brevo cuántos suscriptores hicieron clic.
+      OJO: Instagram no informa de cuántas "visitas al perfil" vinieron específicamente
+      de este enlace (sus Insights no desglosan por procedencia externa) — lo que sí
+      podéis medir con precisión es el clic en el correo (estadísticas de Brevo) y,
+      en Instagram, el aumento general de "Visitas al perfil" / interacciones esos días,
+      de forma agregada. Ver la guía adjunta para más detalle y alternativas.
+    - Asunto y preheader: pensados para generar curiosidad sin desvelar nada.
+
+    YA CONFIGURADO:
+    - Logo: versión en naranja, alojada en la librería de medios de Brevo
+      (https://cdn.convrrt.com/apps/sendinblue/10745832/2bebf1ed-13b5-453f-8239-e439043dbedb.png).
+    - Tipografía: Montserrat (importada por <link> y @import), con Arial/Helvetica
+      como alternativa automática en los clientes que no cargan fuentes web
+      (sobre todo Outlook de escritorio).
+    - Enlace de baja: {{ unsubscribe }}, el marcador dinámico estándar de Brevo.
+    ===================================================================
+  -->
+
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+
+  <!--[if !mso]><!-->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" type="text/css">
+  <!--<![endif]-->
+
+  <style>
+    @media screen {
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+    }
+    html, body { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+    body { background-color: #F4F5F6; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { border-collapse: collapse !important; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; }
+    img { display: block; height: auto; border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+    a { text-decoration: none; }
+    a[x-apple-data-detectors], u + #body a, #MessageViewBody a {
+      color: inherit !important; text-decoration: none !important; font-size: inherit !important;
+      font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important;
+    }
+    .preheader { display: none !important; visibility: hidden; overflow: hidden; opacity: 0; color: transparent; width: 0; height: 0; max-width: 0; max-height: 0; mso-hide: all; }
+
+    @media only screen and (max-width: 620px) {
+      .email-shell { width: 100% !important; max-width: 100% !important; }
+      .mobile-pad { padding-right: 20px !important; padding-left: 20px !important; }
+      .hero-title { font-size: 29px !important; line-height: 37px !important; letter-spacing: 0.8px !important; }
+      .section-title { font-size: 22px !important; line-height: 30px !important; letter-spacing: 0.8px !important; }
+      .body-copy { font-size: 17px !important; line-height: 27px !important; }
+      .detail-panel { padding: 28px 22px !important; }
+      .cta-link { display: block !important; width: auto !important; padding: 18px 16px !important; }
+    }
+  </style>
+</head>
+
+<body id="body" style="margin:0; padding:0; background-color:#F4F5F6;">
+  <div class="preheader" style="display:none; font-size:1px; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">
+    Esta semana tenemos algo especial esperándote... en Instagram.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+
+  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#F4F5F6" style="width:100%; background-color:#F4F5F6;">
+    <tr>
+      <td align="center" style="padding:0;">
+        <!--[if mso]>
+        <table role="presentation" width="600" border="0" cellspacing="0" cellpadding="0"><tr><td>
+        <![endif]-->
+
+        <table role="presentation" class="email-shell" width="600" border="0" cellspacing="0" cellpadding="0" style="width:100%; max-width:600px; margin:0 auto; background-color:#FFFFFF;">
+
+          <!-- LOGO -->
+          <tr>
+            <td align="center" bgcolor="#FFFFFF" style="padding:28px 32px 20px; background-color:#FFFFFF;">
+              <a href="https://www.momoven.es/" target="_blank" style="display:inline-block;">
+                <img src="https://cdn.convrrt.com/apps/sendinblue/10745832/2bebf1ed-13b5-453f-8239-e439043dbedb.png" width="160" alt="Momoven" style="width:160px; max-width:160px; height:auto;">
+              </a>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 1 · HERO NARANJA -->
+          <tr>
+            <td class="mobile-pad" bgcolor="#FF5A00" style="padding:38px 42px 34px; background-color:#FF5A00;">
+              <p class="body-copy" style="margin:0 0 10px; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:26px; font-weight:700; color:#1E2326;">Hola {{ contact.NOMBRE }},</p>
+              <h1 class="hero-title section-title" style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:34px; line-height:42px; font-weight:900; letter-spacing:1.3px; color:#FFFFFF; text-transform:uppercase;">🔥 DESCUBRE LA<br><span style="color:#1E2326;">OFERTA DE LA SEMANA</span></h1>
+              <p class="body-copy" style="margin:18px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:27px; font-weight:600; color:#1E2326;">Esta vez no te lo contamos aquí... tendrás que descubrirlo tú mismo. 👀</p>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 2 · IMAGEN TEASER (sustituir cada semana) -->
+          <tr>
+            <td align="center" bgcolor="#FFFFFF" style="padding:32px 32px 8px; background-color:#FFFFFF;">
+              <img src="https://placehold.co/536x340/2A2F33/FF5A00/png?text=IMAGEN+DE+LA+OFERTA&font=montserrat" width="536" alt="Oferta de la semana" style="width:100%; max-width:536px; height:auto; border-radius:16px; display:block; margin:0 auto;">
+              <p class="body-copy" style="margin:20px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:16px; line-height:25px; color:#5A6165; text-align:center;">Cada semana preparamos algo especial para quienes nos siguen en Instagram.</p>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 3 · CTA A INSTAGRAM (panel oscuro) -->
+          <tr>
+            <td class="mobile-pad" bgcolor="#FFFFFF" style="padding:24px 32px 48px; background-color:#FFFFFF;">
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#1E2326" style="width:100%; border-radius:24px; background-color:#1E2326;">
+                <tr>
+                  <td class="detail-panel" align="center" style="padding:38px 32px; text-align:center;">
+                    <p class="section-title" style="margin:0 0 14px; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:24px; line-height:30px; font-weight:900; letter-spacing:1px; text-transform:uppercase; color:#FFFFFF;">La oferta está en <span style="color:#FF5A00;">@momoven</span></p>
+                    <p class="body-copy" style="margin:0 0 28px; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:27px; color:#D9DDDF;">Búscala en nuestro carrusel y en las historias destacadas. No estará mucho tiempo disponible.</p>
+
+                    <!--[if mso]>
+                    <v:roundrect href="https://www.instagram.com/momoven/?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=oferta_semana" style="height:56px;v-text-anchor:middle;width:300px;" arcsize="14%" strokecolor="#FF5A00" fillcolor="#FF5A00">
+                      <w:anchorlock/>
+                      <center style="color:#1E2326;font-family:'Arial Black',Arial,sans-serif;font-size:15px;font-weight:bold;letter-spacing:1px;">DESCUBRIRLA EN INSTAGRAM</center>
+                    </v:roundrect>
+                    <![endif]-->
+                    <!--[if !mso]><!-->
+                    <a class="cta-link" href="https://www.instagram.com/momoven/?utm_source=newsletter&utm_medium=email&utm_campaign=oferta_semana" target="_blank" style="display:inline-block; padding:18px 34px; border-radius:8px; background-color:#FF5A00; color:#1E2326; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:22px; font-weight:900; letter-spacing:0.4px; text-align:center; text-transform:uppercase;">Descubrirla en Instagram&nbsp;&nbsp;→</a>
+                    <!--<![endif]-->
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 4 · DESPEDIDA -->
+          <tr>
+            <td class="mobile-pad" bgcolor="#FFFFFF" style="padding:0 42px 40px; background-color:#FFFFFF;">
+              <p class="body-copy" style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:28px; color:#303437;">Nos vemos allí 😉</p>
+              <p class="body-copy" style="margin:20px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:28px; color:#303437;">Un saludo,<br>El equipo de Momoven.</p>
+            </td>
+          </tr>
+
+          <!-- FOOTER LEGAL (franja oscura, igual en todas las plantillas) -->
+          <tr>
+            <td class="mobile-pad" bgcolor="#1E2326" style="padding:31px 32px 33px; background-color:#1E2326; text-align:left;">
+              <p style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:11px; line-height:17px; color:#ABB2B5;">
+                <strong style="color:#FFFFFF;">ENTIDAD RESPONSABLE:</strong> MOVEMO IBÉRICA, S. L. (MOMOVEN), con domicilio en Carrer Mare de Deu dels Desemparats, Nº 14 de Villarreal (Castellón). <strong style="color:#FFFFFF;">FINALIDAD DEL TRATAMIENTO:</strong> Gestión de la comunicación con los contactos generados por su actividad empresarial. <strong style="color:#FFFFFF;">EJERCICIO DE DERECHOS:</strong> Puede ejercitar sus derechos de acceso, rectificación, supresión, limitación del tratamiento, olvido, portabilidad y oposición dirigiéndose a <a href="mailto:info@momoven.com" style="color:#FF5A00; text-decoration:underline;">info@momoven.com</a>.
+              </p>
+              <p style="margin:13px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:11px; line-height:17px; color:#ABB2B5;">
+                <strong style="color:#FFFFFF;">BASE JURÍDICA DEL TRATAMIENTO DE DATOS:</strong> Alta como usuario de nuestra web, consentimiento y/o solicitud de información. <strong style="color:#FFFFFF;">DESTINATARIOS DE SUS DATOS:</strong> No se cederán datos a terceros, salvo en los supuestos en que lo disponga o permita la ley. <strong style="color:#FFFFFF;">PROCEDENCIA:</strong> Del propio interesado titular de los datos.
+              </p>
+              <p style="margin:13px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:11px; line-height:17px; color:#ABB2B5;">
+                <strong style="color:#FFFFFF;">CONFIDENCIALIDAD:</strong> Este mensaje se dirige exclusivamente a su destinatario y puede contener información privilegiada o confidencial. Si no es usted el destinatario indicado, queda notificado de que la utilización, divulgación y/o copia sin autorización está prohibida en virtud de la legislación vigente. Si ha recibido este mensaje por error, le rogamos que nos lo comunique inmediatamente por esta misma vía y proceda a su destrucción.
+              </p>
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:22px; border-top:1px solid #40474B;">
+                <tr>
+                  <td align="center" style="padding-top:20px;">
+                    <p style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:12px; line-height:19px; color:#FFFFFF;">Lo has recibido porque eres suscriptor de Momoven.</p>
+                    <p style="margin:8px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:12px; line-height:19px; color:#ABB2B5;">
+                      Si no quieres recibir más nuestros correos,
+                      <a href="{{ unsubscribe }}" style="color:#FF5A00; font-weight:700; text-decoration:underline;">date de baja aquí</a>.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+
+        <!--[if mso]>
+        </td></tr></table>
+        <![endif]-->
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

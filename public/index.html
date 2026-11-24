@@ -251,6 +251,33 @@ html{-webkit-text-size-adjust:100%}
 #toast{position:fixed;right:20px;bottom:20px;background:#1A1A1A;color:#fff;font-size:12px;font-weight:700;padding:12px 16px;border-radius:12px;border:1px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.25);transform:translateY(80px);opacity:0;transition:all .3s;z-index:60}
 #toast.show{transform:none;opacity:1}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== Vista de equipo (Nico) · mismo aspecto que nuestro visor ===== */
+#teamMain{display:none;max-width:1280px;margin:0 auto;padding:20px 24px 40px}
+body.team #visorMain{display:none}
+body.team #teamMain{display:block}
+body.team .tools>*:not(#viewSeg){display:none!important}
+.tv-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.tv-top label{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--muted)}
+.tv-top select{font:inherit;font-size:13px;font-weight:600;color:var(--ink);padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:230px}
+.tv-sp{flex:1}
+.tv-cases{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.tv-cases button{font:600 13px/1 Montserrat,system-ui,sans-serif;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
+.tv-cases button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tv-cases button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tv-note{margin:0 0 12px;font-size:12.5px;color:var(--muted);max-width:90ch}
+.tv-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:18px;align-items:start}
+@media (max-width:1000px){.tv-grid{grid-template-columns:1fr}}
+.tv-stage{display:flex;justify-content:center;background:#E9E9EB;border:1px solid var(--line);border-radius:14px;padding:16px;overflow-x:auto}
+.tv-stage iframe{display:block;border:1px solid var(--line);background:#fff;width:640px;max-width:100%;min-height:480px;transition:width .18s}
+.tv-stage iframe.m{width:390px}
+@media (prefers-reduced-motion:reduce){.tv-stage iframe{transition:none}}
+.tv-side{display:flex;flex-direction:column;gap:14px}
+.tv-meta{font-size:13px}
+.tv-meta b{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);display:block;margin-top:8px}
+.tv-meta b:first-child{margin-top:0}
+.tv-chip{display:inline-block;font:11px ui-monospace,Menlo,monospace;background:var(--peach-bg);border:1px solid var(--peach);color:var(--accent-dark);padding:2px 8px;border-radius:999px;margin:0 4px 4px 0}
+.tv-contact{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -263,6 +290,10 @@ html{-webkit-text-size-adjust:100%}
       <span class="pill">Visor de mails · Brevo</span>
     </div>
     <div class="tools">
+      <div class="seg" id="viewSeg" role="group" aria-label="Vista">
+        <button type="button" data-view="visor" class="on">Visor</button>
+        <button type="button" data-view="equipo">Vista de equipo</button>
+      </div>
       <div class="seg" role="group" aria-label="Idioma">
         <button data-lang="es" class="on">ES</button>
         <button data-lang="en">EN</button>
@@ -282,7 +313,7 @@ html{-webkit-text-size-adjust:100%}
   </div>
 </header>
 
-<main>
+<main id="visorMain">
   <aside>
     <div class="card" id="attrCard">
       <div class="card-h"><span class="t">Atributos Brevo</span><span class="badge" id="attrCount">0 detectados</span></div>
@@ -357,6 +388,40 @@ html{-webkit-text-size-adjust:100%}
     </div>
   </section>
 </main>
+
+<section id="teamMain" aria-label="Vista de equipo">
+  <div class="tv-top">
+    <label>Buscar <input type="search" id="tvQ" placeholder="nombre, id o atributo" style="font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;min-width:200px"></label>
+    <label>Correo <select id="tvMail" aria-label="Correo" style="max-width:420px"></select></label>
+    <div class="seg" id="tvLang" style="display:none" role="group" aria-label="Idioma"><button type="button" data-l="es" class="on">ES</button><button type="button" data-l="en">EN</button></div>
+    <span class="tv-sp"></span>
+    <div class="seg" id="tvDev" role="group" aria-label="Dispositivo"><button type="button" data-d="d" class="on">Escritorio</button><button type="button" data-d="m">Móvil</button></div>
+  </div>
+  <div class="tv-cases" id="tvVersions" role="group" aria-label="Qué recibe el contacto"></div>
+  <p class="tv-note" id="tvNote"></p>
+  <div class="tv-grid">
+    <div class="tv-stage"><iframe id="tvFrame" title="Vista previa del correo" sandbox="allow-same-origin allow-popups" scrolling="no"></iframe></div>
+    <aside class="tv-side">
+      <div class="card tv-meta"><div class="card-h"><span class="t">Esta versión</span></div>
+        <b>Asunto</b><div id="tvSubj">—</div>
+        <b>Preheader</b><div id="tvPre">—</div>
+        <b>Valores aplicados</b><div id="tvVals"></div>
+      </div>
+      <div class="card" id="tvCamposCard" style="display:none"><div class="card-h"><span class="t">Campos de texto</span></div>
+        <p class="hint">Rellena lo que el correo muestra. Las direcciones de correo tienen sugerencias del equipo.</p>
+        <div id="tvCampos" style="display:grid;gap:10px;margin-top:10px"></div>
+        <datalist id="tvEquipo"></datalist>
+      </div>
+      <div class="card"><div class="card-h"><span class="t">Revisión rápida</span></div><div id="tvChecks"></div></div>
+      <div class="card"><div class="card-h"><span class="t">Contactos reales en Brevo</span></div>
+        <p class="hint">Busca contactos que recibirían esta versión y mira el correo con sus datos.</p>
+        <div class="row" style="margin-top:10px"><button class="cta" id="tvBuscar" style="width:100%;margin:0">Buscar contactos en Brevo</button></div>
+        <div id="tvContactos"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
 
 <div id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <div class="mbox">
@@ -461,6 +526,15 @@ function val(tok,ctx){
 }
 function truthy(v){return v!==null&&v!==undefined&&v!==false&&v!=='false'&&v!=='';}
 function atom(s,ctx){
+  var mn=s.match(/^not\s+(.+)$/);
+  if(mn) return !atom(mn[1].trim(),ctx);
+  var mi=s.match(/^("[^"]*"|'[^']*'|[\w.]+)\s+in\s+([\w.]+)$/);
+  if(mi){
+    var ia=val(mi[1],ctx),ib=lookup(mi[2],ctx);
+    if(ia===null||ib===undefined||ib==='') return false;
+    if(Array.isArray(ib)) return ib.some(function(x){return String(x)===String(ia);});
+    return String(ib).split(/\s*,\s*/).indexOf(String(ia))!==-1;
+  }
   var m=s.match(/^(.+?)\s+contains\s+(.+)$/);
   if(m){var a=val(m[1],ctx),b=val(m[2],ctx);return a!==null&&String(a).indexOf(String(b))!==-1;}
   m=s.match(/^(.+?)\s*(==|!=|>=|<=|>|<)\s*(.+)$/);
@@ -507,7 +581,7 @@ function render(nodes,ctx){
 // Variables de Brevo: qué tipo de control necesita cada una
 function analyzeVars(src){
   var meta={},segs=src.match(/\{%-?[\s\S]*?-?%\}|\{\{[\s\S]*?\}\}/g)||[];
-  function M(v){return meta[v]||(meta[v]={name:v,out:false,lits:[],num:false,truthy:false});}
+  function M(v){return meta[v]||(meta[v]={name:v,out:false,lits:[],num:false,truthy:false,multi:false});}
   segs.forEach(function(s){
     if(s.indexOf('{{')===0){
       var m=s.match(/\b(?:contact|params)\.[A-Za-z_]\w*/);
@@ -515,6 +589,10 @@ function analyzeVars(src){
       return;
     }
     var rest=s.replace(/^\{%-?\s*(?:if|elif|elsif)\s+/,'').replace(/\s*-?%\}$/,'');
+    rest=rest.replace(/(?:"([^"]*)"|'([^']*)')\s+in\s+((?:contact|params)\.[A-Za-z_]\w*)/g,function(all,s1,s2,v){
+      if(v!=='contact.LANGUAGE'){var o=M(v);o.multi=true;var lit=s1!==undefined?s1:s2;if(o.lits.indexOf(lit)===-1) o.lits.push(lit);}
+      return ' ';
+    });
     var re=/\b((?:contact|params)\.[A-Za-z_]\w*)\s*(==|!=)\s*(?:"([^"]*)"|'([^']*)'|(-?\d+(?:\.\d+)?))/g;
     rest=rest.replace(re,function(all,v,op,s1,s2,n){
       if(v!=='contact.LANGUAGE'){
@@ -532,6 +610,7 @@ function analyzeVars(src){
 }
 function ctype(m){
   if(m.out) return 'text';
+  if(m.multi) return 'multi';
   if(m.lits.length) return 'options';
   if(m.truthy&&!m.num) return 'toggle';
   return 'text';
@@ -625,6 +704,10 @@ function buildAttrs(meta){
       w.innerHTML=head+'<div class="opts">'+opts.map(function(o){
         return '<button type="button" class="opt" data-val="'+esc(o)+'">'+(o===''?'(vacío)':esc(o))+'</button>';
       }).join('')+'</div>';
+    } else if(t==='multi'){
+      w.innerHTML=head+'<div class="opts">'+m.lits.map(function(o){
+        return '<label class="mchk"><input type="checkbox" data-multi value="'+esc(o)+'"> '+esc(o)+'</label>';
+      }).join('')+'</div><p class="hint" style="margin-top:6px">Opción múltiple: marca uno, varios o ninguno.</p>';
     } else if(t==='toggle'){
       w.innerHTML=head+'<label class="sw"><input type="checkbox" data-toggle><span class="slider"></span><em style="font-style:normal">Activado</em></label>';
     } else {
@@ -639,6 +722,10 @@ function syncAttrs(){
   document.querySelectorAll('#attrs .attr').forEach(function(w){
     var n=w.dataset.var,v=state.vals[n]||'',t=w.dataset.type;
     if(t==='options') w.querySelectorAll('.opt').forEach(function(b){b.classList.toggle('sel',b.dataset.val===v);});
+    else if(t==='multi'){
+      var sel=v?String(v).split(/\s*,\s*/):[];
+      w.querySelectorAll('input[data-multi]').forEach(function(i){i.checked=sel.indexOf(i.value)!==-1;});
+    }
     else if(t==='toggle'){
       var c=w.querySelector('input'); c.checked=truthy(v);
       w.querySelector('em').textContent=c.checked?'Activado':'Desactivado';
@@ -816,6 +903,11 @@ $('#attrs').addEventListener('click',function(e){
 });
 $('#attrs').addEventListener('change',function(e){
   if(e.target.matches('[data-toggle]')){state.vals[e.target.closest('.attr').dataset.var]=e.target.checked?'true':'';update();}
+  else if(e.target.matches('[data-multi]')){
+    var mbox=e.target.closest('.attr'),msel=[];
+    mbox.querySelectorAll('input[data-multi]').forEach(function(i){if(i.checked) msel.push(i.value);});
+    state.vals[mbox.dataset.var]=msel.join(', ');update();
+  }
 });
 $('#attrs').addEventListener('input',function(e){
   if(e.target.matches('[data-text]')){state.vals[e.target.closest('.attr').dataset.var]=e.target.value;later();}
@@ -913,7 +1005,8 @@ function filtrosActuales(){
     if(n.indexOf('contact.')!==0) return;
     if(ctype(meta[n])==='text') return;
     var v=state.vals[n]; if(!v) return;
-    out.push({attr:n.slice(8),valor:String(v)});
+    if(ctype(meta[n])==='multi') String(v).split(/\s*,\s*/).forEach(function(x){if(x) out.push({attr:n.slice(8),valor:x});});
+    else out.push({attr:n.slice(8),valor:String(v)});
   });
   return out;
 }
@@ -1239,6 +1332,219 @@ try{
   }
 }catch(e){}
 update();
+
+/* ===== Vista de equipo: usa el motor del visor (analyzeVars, render, runChecks, búsqueda de contactos) ===== */
+var TV={lista:[],mail:null,html:'',meta:{},versiones:[],vi:0,dev:'d',lang:'es',contacto:null,cargado:false};
+function tvShort(n){return n.replace(/^(contact|params)\./,'');}
+function tvSubconjuntos(l){
+  var out=[];
+  for(var m=1;m<(1<<l.length);m++){var s=[];l.forEach(function(x,i){if(m&(1<<i)) s.push(x);});out.push(s);}
+  out.sort(function(a,b){var ka=a.length===1?0:1,kb=b.length===1?0:1;return ka-kb||a.length-b.length;});
+  out.push([]);
+  return out;
+}
+function tvVersionesDe(meta){
+  var dims=[],truncado=false;
+  Object.keys(meta).forEach(function(n){
+    if(n==='contact.NOMBRE') return;
+    var m=meta[n],t=ctype(m),s=tvShort(n);
+    if(t==='multi') dims.push({n:n,opts:tvSubconjuntos(m.lits).map(function(x){return {v:x.join(', '),label:x.length===0?s+' vacío':(x.length===1?'Solo '+x[0]:x.join(' y '))};})});
+    else if(t==='options') dims.push({n:n,opts:m.lits.map(function(l){return {v:l,label:s+' = '+l};}).concat([{v:'',label:s+' vacío'}])});
+    else if(t==='toggle') dims.push({n:n,opts:[{v:'true',label:s+' sí'},{v:'',label:s+' no'}]});
+  });
+  var res=[{vals:{},labels:[]}];
+  dims.forEach(function(d){
+    if(res.length*d.opts.length>24){truncado=true;return;}
+    var nx=[];res.forEach(function(r){d.opts.forEach(function(o){var v={};Object.keys(r.vals).forEach(function(k){v[k]=r.vals[k];});v[d.n]=o.v;nx.push({vals:v,labels:r.labels.concat([o.label])});});});
+    res=nx;
+  });
+  return {lista:res.map(function(r){return {vals:r.vals,label:r.labels.join(' · ')||'Único'};}),truncado:truncado};
+}
+TV.texto={};
+var TV_EQUIPO=['nico@momoven.com','guido@momoven.com','alvaro@momoven.com','teresa@momoven.com','david@momoven.com','marketing@momoven.com'];
+function tvEsEmail(n){return /mail|correo/i.test(n);}
+function tvCtx(vals){
+  var ctx={};
+  Object.keys(TV.meta).forEach(function(n){ctx[n]=(n in DEFAULTS)?DEFAULTS[n]:'';});
+  Object.keys(TV.texto).forEach(function(n){ctx[n]=TV.texto[n];});
+  if(!TV.texto['contact.NOMBRE']) ctx['contact.NOMBRE']='Nico';
+  Object.keys(vals||{}).forEach(function(k){ctx[k]=vals[k];});
+  ctx['contact.LANGUAGE']=TV.lang;
+  return ctx;
+}
+function tvActual(){
+  if(TV.contacto) return {vals:TV.contacto.vals,label:'Contacto #'+TV.contacto.id};
+  return TV.versiones[TV.vi]||{vals:{},label:''};
+}
+function tvRender(){
+  var v=tvActual(),ctx=tvCtx(v.vals),html;
+  if(!TV.html.trim()){$('#tvFrame').style.display='none';return;}
+  $('#tvFrame').style.display='block';
+  try{html=render(parse(tokenize(TV.html)),ctx);}
+  catch(e){html='<p style="font-family:sans-serif;padding:16px">No he podido leer las condiciones del HTML: '+esc(e.message)+'</p>';}
+  var f=$('#tvFrame');
+  f.className=TV.dev==='m'?'m':'';
+  f.onload=function(){
+    function fit2(){try{f.style.height=(f.contentDocument.documentElement.scrollHeight+4)+'px';}catch(e){}}
+    fit2();setTimeout(fit2,400);setTimeout(fit2,1500);
+    try{if(window.ResizeObserver) new ResizeObserver(fit2).observe(f.contentDocument.documentElement);}catch(e){}
+  };
+  var ayuda='<base target="_blank"><style>html{overflow-y:hidden!important}</style>';
+  f.srcdoc=html.indexOf('<head')!==-1?html.replace(/<head([^>]*)>/i,'<head$1>'+ayuda):ayuda+html;
+  var doc=new DOMParser().parseFromString(html,'text/html');
+  var asunto=(TV.mail&&TV.mail.asunto)||oneLine(doc.title||'');
+  var pre=''; doc.querySelectorAll('div').forEach(function(d){if(!pre&&/display\s*:\s*none/i.test(d.getAttribute('style')||'')) pre=oneLine(d.textContent).replace(/[ ‌\s]+/g,' ').trim();});
+  $('#tvSubj').textContent=asunto?asunto+'  ('+asunto.length+' caracteres)':'—';
+  $('#tvPre').textContent=pre?pre+'  ('+pre.length+' caracteres)':'—';
+  var chips=Object.keys(v.vals||{}).map(function(k){return '<span class="tv-chip">'+esc(tvShort(k))+' = '+(v.vals[k]===''?'vacío':esc(v.vals[k]))+'</span>';}).join('');
+  $('#tvVals').innerHTML=chips||'<span class="hint">Este correo no cambia según el contacto.</span>';
+  // revisión rápida: reutiliza runChecks del visor y copia el resultado
+  try{runChecks(html,doc,TV.meta,[],asunto+' '+pre);$('#tvChecks').innerHTML=$('#checks').innerHTML;}catch(e){$('#tvChecks').innerHTML='<p class="hint">No he podido hacer la revisión.</p>';}
+}
+function tvPintarVersiones(){
+  var box=$('#tvVersions');box.innerHTML='';
+  TV.versiones.forEach(function(v,i){
+    var b=document.createElement('button');b.type='button';b.textContent=v.label;b.dataset.i=i;
+    b.setAttribute('aria-pressed',(i===TV.vi&&!TV.contacto)?'true':'false');
+    box.appendChild(b);
+  });
+  if(TV.contacto){
+    var c=document.createElement('button');c.type='button';c.setAttribute('aria-pressed','true');c.textContent='Contacto #'+TV.contacto.id;box.appendChild(c);
+  }
+}
+function tvPintarCampos(){
+  var campos=Object.keys(TV.meta).filter(function(n){return n!=='contact.LANGUAGE'&&ctype(TV.meta[n])==='text';});
+  var box=$('#tvCampos'),card=$('#tvCamposCard');
+  if(!campos.length){card.style.display='none';box.innerHTML='';return;}
+  card.style.display='block';
+  box.innerHTML=campos.map(function(n){
+    var v=TV.texto[n]!==undefined?TV.texto[n]:((n in DEFAULTS)?DEFAULTS[n]:(n==='contact.NOMBRE'?'Nico':''));
+    TV.texto[n]=v;
+    var lista=tvEsEmail(n)?' list="tvEquipo"':'';
+    return '<label style="display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--muted)">'+esc(tvShort(n))+
+      '<input type="text" data-campo="'+esc(n)+'" value="'+esc(v)+'" autocomplete="off"'+lista+
+      ' style="font:inherit;font-size:13px;font-weight:500;color:var(--ink);padding:8px 10px;border:1px solid var(--line);border-radius:10px"></label>';
+  }).join('');
+  var dl=document.getElementById('tvEquipo');dl.innerHTML=TV_EQUIPO.map(function(e){return '<option value="'+e+'">';}).join('');
+}
+$('#tvCampos').addEventListener('input',function(e){
+  var n=e.target.dataset.campo; if(!n) return;
+  TV.texto[n]=e.target.value; tvRender();
+});
+function tvAnalizar(){
+  TV.meta=analyzeVars(TV.html);
+  tvPintarCampos();
+  var r=tvVersionesDe(TV.meta);
+  TV.versiones=r.lista;TV.vi=0;TV.contacto=null;
+  var usaIdioma=/contact\.LANGUAGE/.test(TV.html);
+  $('#tvLang').style.display=usaIdioma?'inline-flex':'none';
+  $('#tvNote').textContent=((TV.mail&&TV.mail.nota)||'')+(r.truncado?' Hay demasiadas combinaciones: se muestran las principales.':'')+(TV.versiones.length>1?'':' Este correo no cambia según el contacto.');
+  $('#tvContactos').innerHTML='';
+  tvPintarVersiones();tvRender();
+}
+function tvCargarCorreo(id){
+  if(id==='__visor'){TV.mail={id:id,titulo:'Correo del visor',nota:'El correo que has pegado en el Visor.'};TV.html=$('#src').value;tvAnalizar();return;}
+  var m=TV.todos.filter(function(x){return x.id===id;})[0];if(!m) return;
+  TV.mail=m;
+  fetch('correos/'+m.archivo).then(function(r){return r.text();}).then(function(t){TV.html=t;tvAnalizar();})
+    .catch(function(){TV.html='';$('#tvNote').textContent='No he podido cargar ese correo.';});
+}
+TV.todos=[];
+function tvPintarSelector(){
+  var q=($('#tvQ').value||'').toLowerCase().trim(), s=$('#tvMail'), cur=s.value;
+  var grupos={};
+  TV.todos.forEach(function(m){
+    var txt=(m.titulo+' '+m.id+' '+(m.atributos||[]).join(' ')+' '+(m.asunto||'')).toLowerCase();
+    if(q && txt.indexOf(q)===-1) return;
+    var g=m.grupo||'Otros';(grupos[g]=grupos[g]||[]).push(m);
+  });
+  var html='';
+  Object.keys(grupos).forEach(function(g){
+    html+='<optgroup label="'+esc(g)+' ('+grupos[g].length+')">'+grupos[g].map(function(m){
+      return '<option value="'+esc(m.id)+'">'+esc(m.titulo)+(m.activa===false?' · inactiva':'')+'</option>';}).join('')+'</optgroup>';
+  });
+  s.innerHTML=html||'<option value="">Ningún correo coincide</option>';
+  if(cur && s.querySelector('option[value="'+cur.replace(/"/g,'')+'"]')) s.value=cur;
+}
+function tvIniciar(){
+  if(TV.cargado) return;TV.cargado=true;
+  Promise.all([
+    fetch('correos/index.json').then(function(r){return r.json();}).catch(function(){return [];}),
+    fetch('correos/brevo-index.json').then(function(r){return r.json();}).catch(function(){return [];})
+  ]).then(function(res){
+    var nuestros=res[0].map(function(m){return {id:m.id,titulo:m.titulo,nota:m.nota,archivo:m.archivo,asunto:m.asunto,grupo:'Nuestros · app26 (sin enviar)',activa:false,atributos:[]};});
+    var brevo=res[1].map(function(m){return {id:m.id,titulo:m.titulo,nota:'Plantilla de Brevo '+m.id+' · '+(m.activa?'activa':'inactiva')+' · etiqueta '+m.tag+(m.atributos.length?' · usa: '+m.atributos.join(', '):''),archivo:m.archivo,asunto:m.asunto,grupo:'Brevo · '+m.tag,activa:m.activa,atributos:m.atributos};});
+    TV.lista=nuestros; TV.todos=nuestros.concat(brevo);
+    TV.todos.push({id:'__visor',titulo:'Correo pegado en el Visor',nota:'El correo que has pegado en el Visor.',grupo:'Otros',atributos:[]});
+    tvPintarSelector();
+    var first=nuestros[0]?nuestros[0].id:'__visor';
+    $('#tvMail').value=first; tvCargarCorreo(first);
+  });
+}
+$('#tvQ').addEventListener('input',function(){tvPintarSelector();});
+// Contactos de Brevo (misma función y misma contraseña que el visor)
+function tvFiltros(){
+  var out=[],v=tvActual().vals||{};
+  Object.keys(v).forEach(function(n){
+    if(n.indexOf('contact.')!==0||!v[n]) return;
+    if(ctype(TV.meta[n])==='multi') String(v[n]).split(/\s*,\s*/).forEach(function(x){if(x) out.push({attr:n.slice(8),valor:x});});
+    else out.push({attr:n.slice(8),valor:String(v[n])});
+  });
+  return out;
+}
+function tvMostrarAtributos(){
+  var out=[];Object.keys(TV.meta).forEach(function(n){if(n.indexOf('contact.')===0) out.push(n.slice(8));});
+  if(/contact\.LANGUAGE/.test(TV.html)&&out.indexOf('LANGUAGE')===-1) out.push('LANGUAGE');
+  return out;
+}
+function tvMsg(t){$('#tvContactos').innerHTML='<div class="ejmsg" style="margin-top:10px">'+esc(t)+'</div>';}
+var tvUltimos=[];
+function tvRefrescarContactos(){
+  if(!tvUltimos.length&&!$('#tvContactos').innerHTML.trim()) return;
+  if(getPw()) tvBuscar();
+  else {tvUltimos=[];$('#tvContactos').innerHTML='<div class="ejmsg" style="margin-top:10px">Pulsa «Buscar contactos en Brevo» para ver los de esta versión.</div>';}
+}
+function tvBuscar(){
+  if(location.protocol==='file:'){tvMsg('Esta búsqueda solo funciona en la versión publicada en Netlify, no con el archivo abierto en local.');return;}
+  if(TV.contacto){TV.contacto=null;}
+  if(!getPw()){pedirPassword('',tvBuscar);return;}
+  var fil=tvFiltros();
+  $('#tvContactos').innerHTML='<p class="hint" style="margin-top:10px">Buscando en Brevo…</p>';$('#tvBuscar').disabled=true;
+  fetch('/api/contactos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:getPw(),idioma:TV.lang,filtros:fil,mostrar:tvMostrarAtributos(),max:3})})
+    .then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {status:r.status,j:j};});})
+    .then(function(x){
+      $('#tvBuscar').disabled=false;
+      if(x.status===401){setPw('');$('#tvContactos').innerHTML='';pedirPassword('Contraseña incorrecta.',tvBuscar);return;}
+      if(x.status!==200){tvMsg(x.j.error||'No se ha podido buscar.');return;}
+      $('#ejSalir').style.display='inline-block';
+      tvUltimos=x.j.contactos||[];
+      if(!tvUltimos.length){tvMsg('No hay contactos que cumplan esas condiciones entre los '+x.j.revisados+' revisados.');return;}
+      $('#tvContactos').innerHTML='<p class="hint" style="margin:10px 0 0">'+tvUltimos.length+' de '+x.j.coincidencias+' coincidencia(s) entre '+x.j.revisados+' revisados.</p>'+
+        tvUltimos.map(function(c,i){return '<div class="tv-contact"><div><b>#'+esc(c.id)+' · '+esc(mascara(c.email))+'</b><div>'+(chipsValores(valoresDeContacto(c))||'<span class="hint">Sin atributos que use este correo</span>')+'</div></div><button class="ghost dark" data-tv="'+i+'">Ver con sus datos</button></div>';}).join('');
+    })
+    .catch(function(){$('#tvBuscar').disabled=false;tvMsg('No se ha podido conectar con la función.');});
+}
+// Eventos
+document.querySelectorAll('#viewSeg [data-view]').forEach(function(b){b.addEventListener('click',function(){
+  var eq=b.dataset.view==='equipo';
+  document.body.classList.toggle('team',eq);
+  document.querySelectorAll('#viewSeg [data-view]').forEach(function(x){x.classList.toggle('on',x===b);});
+  if(eq){tvIniciar();if($('#tvMail').value==='__visor') tvCargarCorreo('__visor');}
+  else update();
+});});
+$('#tvMail').addEventListener('change',function(){tvCargarCorreo(this.value);tvRefrescarContactos();});
+$('#tvVersions').addEventListener('click',function(e){var b=e.target.closest('button[data-i]');if(!b) return;TV.contacto=null;TV.vi=Number(b.dataset.i);tvPintarVersiones();tvRender();tvRefrescarContactos();});
+document.querySelectorAll('#tvLang [data-l]').forEach(function(b){b.addEventListener('click',function(){TV.lang=b.dataset.l;document.querySelectorAll('#tvLang [data-l]').forEach(function(x){x.classList.toggle('on',x===b);});tvRender();tvRefrescarContactos();});});
+document.querySelectorAll('#tvDev [data-d]').forEach(function(b){b.addEventListener('click',function(){TV.dev=b.dataset.d;document.querySelectorAll('#tvDev [data-d]').forEach(function(x){x.classList.toggle('on',x===b);});tvRender();});});
+$('#tvBuscar').addEventListener('click',tvBuscar);
+$('#tvContactos').addEventListener('click',function(e){
+  var b=e.target.closest('[data-tv]');if(!b) return;
+  var c=tvUltimos[b.dataset.tv];if(!c) return;
+  TV.contacto={id:c.id,vals:valoresDeContacto(c)};
+  if((c.atributos||{}).NOMBRE){TV.texto['contact.NOMBRE']=String(c.atributos.NOMBRE);tvPintarCampos();}
+  var l=(c.atributos||{}).LANGUAGE; if(l){TV.lang=String(l).toLowerCase().indexOf('en')===0?'en':'es';document.querySelectorAll('#tvLang [data-l]').forEach(function(x){x.classList.toggle('on',x.dataset.l===TV.lang);});}
+  tvPintarVersiones();tvRender();toast('Datos del contacto #'+c.id+' cargados');
+});
 </script>
 </body>
 </html>

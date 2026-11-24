@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light"><title>Extiende tu reserva</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;background-color:#FFFFFF;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#FFFFFF;"><tr><td align="center">
+<table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background-color:#FFFFFF;">
+<tr><td style="padding:32px 40px 0 40px;">
+<img src="https://cdn.convrrt.com/apps/sendinblue/10745832/87abf61c-2418-4659-8d2a-007feb47bd1b.svg" width="150" alt="Momoven" style="display:block;width:150px;height:auto;border:0;">
+</td></tr>
+
+<tr><td style="padding:24px 40px 0 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<h1 style="margin:0 0 16px 0;font-size:28px;line-height:36px;font-weight:800;color:#1F2D3D;">Hola {{ contact.NOMBRE }}, ahora puedes extender tu ruta</h1>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;">Ya puedes añadir días a una reserva confirmada, antes o después de tus fechas, o a un alquiler que tienes en curso.</p>
+</td></tr>
+
+<tr><td style="padding:8px 40px 0 40px;">
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:2px solid #FF5C00;border-radius:12px;"><tr><td style="padding:22px 24px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+{% if contact.CURRENT_BOOKING_STATUS == "on_rent" %}
+<span style="display:inline-block;background-color:#FF5C00;color:#FFFFFF;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 11px;border-radius:20px;">EXTIÉNDELO</span>
+<p style="margin:12px 0 6px 0;font-size:40px;line-height:46px;font-weight:800;color:#FF5C00;letter-spacing:-1px;">Haz que tu alquiler dure más días</p>
+<p style="margin:0 0 6px 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Extiende tu alquiler sin devolver la moto.</p>
+<p style="margin:0;font-size:15px;line-height:23px;color:#333333;">Tu alquiler termina el {{ contact.CURRENT_BOOKING_END }}. Extiéndelo y sigue disfrutando.</p>
+{% elif contact.CURRENT_BOOKING_STATUS == "booked" %}
+<span style="display:inline-block;background-color:#FF5C00;color:#FFFFFF;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 11px;border-radius:20px;">TU ALQUILER SE ACERCA</span>
+<p style="margin:12px 0 6px 0;font-size:40px;line-height:46px;font-weight:800;color:#FF5C00;letter-spacing:-1px;">Haz que tu reserva dure más días</p>
+<p style="margin:0 0 6px 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Extiende tu reserva sin empezar de cero.</p>
+<p style="margin:0;font-size:15px;line-height:23px;color:#333333;">Tienes la moto del {{ contact.CURRENT_BOOKING_START }} al {{ contact.CURRENT_BOOKING_END }}. Extiéndela y sigue disfrutando.</p>
+{% else %}
+<span style="display:inline-block;background-color:#FF5C00;color:#FFFFFF;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 11px;border-radius:20px;">FLEXIBLE</span>
+<p style="margin:12px 0 6px 0;font-size:44px;line-height:48px;font-weight:800;color:#FF5C00;">Amplía tu reserva</p>
+<p style="margin:0 0 6px 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Reserva con total flexibilidad</p>
+<p style="margin:0;font-size:15px;line-height:23px;color:#333333;">Si tus planes cambian antes de salir o a mitad de viaje, añade días a tu reserva sin empezar de cero.</p>
+{% endif %}
+</td></tr></table>
+</td></tr>
+
+<tr><td style="padding:28px 40px 0 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<p style="margin:0 0 12px 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Cómo funciona</p>
+<p style="margin:0 0 8px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">1.</strong> Entra en tu reserva.</p>
+<p style="margin:0 0 8px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">2.</strong> Pulsa «Ampliar».</p>
+<p style="margin:0 0 16px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">3.</strong> Elige los nuevos días.</p>
+<p style="margin:0 0 12px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#1F2D3D;">Reserva inmediata:</strong> si la moto está libre, la ampliación se confirma y se cobra al momento.</p>
+<p style="margin:0 0 12px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#1F2D3D;">Bajo aceptación:</strong> el propietario acepta o rechaza. Te avisamos en cuanto responda, y tus fechas no cambian mientras tanto.</p>
+<p style="margin:0 0 16px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#1F2D3D;">Plazo:</strong> pide la ampliación con al menos 24 horas de antelación al inicio o al fin de tu contrato.</p>
+</td></tr>
+
+<tr><td style="padding:8px 40px 0 40px;">
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#FFF8F2;border:1px dashed #FFD9BE;border-radius:10px;"><tr><td style="padding:18px 22px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:23px;color:#333333;">
+<strong style="color:#1F2D3D;">¿Aún no has usado tu descuento de Black Friday?</strong> También puedes aplicarlo al ampliar tu reserva.
+</td></tr></table>
+</td></tr>
+
+<tr><td style="padding:28px 40px 0 40px;">
+<table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td align="left" bgcolor="#FF5C00" style="background-color:#FF5C00;border-radius:8px;">
+{% if contact.CURRENT_BOOKING_STATUS == "on_rent" or contact.CURRENT_BOOKING_STATUS == "booked" %}
+<a href="https://www.momoven.es/cuenta-alquileres?utm_source=brevo&utm_medium=email&utm_campaign=ext26&utm_content=info_rider_booked" target="_blank" style="display:inline-block;padding:14px 30px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:8px;">Gestionar mi reserva</a>
+{% else %}
+<a href="https://www.momoven.es/motos?utm_source=brevo&utm_medium=email&utm_campaign=ext26&utm_content=info_rider_booked" target="_blank" style="display:inline-block;padding:14px 30px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:8px;">Ver motos disponibles</a>
+{% endif %}
+</td></tr></table>
+</td></tr>
+
+<tr><td style="padding:20px 40px 0 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<p style="margin:0 0 16px 0;font-size:14px;line-height:22px;color:#767676;">¿Tienes alguna duda? <a href="https://wa.me/34611404535" style="color:#FF5C00;font-weight:600;text-decoration:underline;">Escríbenos por WhatsApp</a></p>
+<p style="margin:0;font-size:16px;line-height:26px;color:#333333;">Un saludo.<br><strong style="color:#1F2D3D;">El equipo de Momoven.</strong></p>
+</td></tr>
+
+<tr><td style="padding:28px 40px 36px 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;line-height:17px;color:#666666;border-top:1px solid #E5E5E5;">
+<p style="margin:0 0 10px 0;padding-top:16px;">La ampliación depende de la disponibilidad de la moto en el calendario del propietario. Se rige por las condiciones de tu contrato actual.</p>
+<p style="margin:0 0 10px 0;"><strong>ENTIDAD RESPONSABLE:</strong> MOVEMO IBÉRICA, S. L. (MOMOVEN), con domicilio en Calle Marqués de Valverde, nº 8, 1A, 12003 Castellón de la Plana. <strong>FINALIDAD DEL TRATAMIENTO:</strong> Información sobre la función de ampliación de reservas. <strong>EJERCICIO DE DERECHOS:</strong> info@momoven.com.</p>
+<p style="margin:0 0 10px 0;"><strong>BASE JURÍDICA DEL TRATAMIENTO DE DATOS:</strong> Alta como usuario de nuestra web y ejecución de la relación contractual. <strong>DESTINATARIOS DE SUS DATOS:</strong> No se ceden a terceros salvo por ley. <strong>PROCEDENCIA:</strong> Del propio interesado.</p>
+<p style="margin:0 0 10px 0;"><strong>CONFIDENCIALIDAD:</strong> Este mensaje se dirige exclusivamente a su destinatario. Si lo has recibido por error, avísanos y elimínalo.</p>
+<p style="margin:0 0 10px 0;">Has recibido este email porque tienes una reserva en Momoven. Puedes gestionar tus preferencias de comunicación <a href="{{ unsubscribe }}" style="color:#666666;text-decoration:underline;">aquí</a>.</p>
+<p style="margin:0;">© 2026 Momoven</p>
+</td></tr>
+
+</table></td></tr></table>
+</body></html>

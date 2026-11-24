@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light"><title>Ampliación de reserva</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;background-color:#FFFFFF;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#FFFFFF;"><tr><td align="center">
+<table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background-color:#FFFFFF;">
+
+<tr><td style="padding:32px 40px 0 40px;">
+<img src="https://cdn.convrrt.com/apps/sendinblue/10745832/87abf61c-2418-4659-8d2a-007feb47bd1b.svg" width="150" alt="Momoven" style="display:block;width:150px;height:auto;border:0;">
+</td></tr>
+
+<tr><td style="padding:24px 40px 0 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+{% if contact.HOST_HAS_IB %}
+<h1 style="margin:0 0 16px 0;font-size:28px;line-height:36px;font-weight:800;color:#1F2D3D;">{{ params.nombreCliente }} ha ampliado su reserva</h1>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;">Hola, {{ params.nombrePropietario }}.</p>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;"><strong style="color:#1F2D3D;">{{ params.nombreCliente }}</strong> ha ampliado la reserva de tu <strong style="color:#1F2D3D;">{{ params.modeloMoto }}</strong>. Ya está confirmada.</p>
+{% else %}
+<h1 style="margin:0 0 16px 0;font-size:28px;line-height:36px;font-weight:800;color:#1F2D3D;">{{ params.nombreCliente }} quiere ampliar su reserva</h1>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;">Hola, {{ params.nombrePropietario }}.</p>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;"><strong style="color:#1F2D3D;">{{ params.nombreCliente }}</strong> quiere ampliar la reserva de tu <strong style="color:#1F2D3D;">{{ params.modeloMoto }}</strong>. Revísala y decide si la aceptas o la rechazas.</p>
+{% endif %}
+</td></tr>
+
+<tr><td style="padding:8px 40px 0 40px;">
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:2px solid #FF5C00;border-radius:12px;"><tr><td style="padding:22px 24px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+{% if contact.HOST_HAS_IB %}
+<span style="display:inline-block;background-color:#FF5C00;color:#FFFFFF;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 11px;border-radius:20px;">CONFIRMADA</span>
+{% else %}
+<span style="display:inline-block;background-color:#FF5C00;color:#FFFFFF;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 11px;border-radius:20px;">PENDIENTE</span>
+{% endif %}
+<p style="margin:12px 0 6px 0;font-size:40px;line-height:46px;font-weight:800;color:#FF5C00;">{{ params.fechaFin }}</p>
+<p style="margin:0 0 6px 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Nueva fecha de devolución</p>
+<p style="margin:0;font-size:15px;line-height:23px;color:#333333;">Desde el {{ params.fechaInicio }} · {{ params.horaInicio }} hasta el {{ params.fechaFin }} · {{ params.horaFin }}.</p>
+</td></tr></table>
+</td></tr>
+
+<tr><td style="padding:28px 40px 0 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<p style="margin:0 0 12px 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Qué tienes que saber</p>
+{% if contact.HOST_HAS_IB %}
+<p style="margin:0 0 12px 0;font-size:15px;line-height:24px;color:#333333;">La ampliación se ha confirmado y cobrado al momento, porque tu calendario estaba libre. Tu moto queda reservada también en las nuevas fechas.</p>
+{% else %}
+<p style="margin:0 0 12px 0;font-size:15px;line-height:24px;color:#333333;">Puedes aceptar o rechazar la ampliación desde el botón de abajo. Responde cuanto antes para que el conductor pueda organizar su ruta.</p>
+{% endif %}
+<p style="margin:0 0 16px 0;font-size:15px;line-height:24px;color:#333333;">Mantén tu calendario al día. Los días marcados como no disponibles no se pueden ampliar.</p>
+</td></tr>
+
+<tr><td style="padding:8px 40px 0 40px;">
+<table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td align="left" bgcolor="#FF5C00" style="background-color:#FF5C00;border-radius:8px;">
+<a href="{{ params.urlSolicitud }}" target="_blank" style="display:inline-block;padding:14px 30px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:8px;">Ver la ampliación</a>
+</td></tr></table>
+</td></tr>
+
+<tr><td style="padding:20px 40px 0 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<p style="margin:0 0 16px 0;font-size:14px;line-height:22px;color:#767676;">¿Tienes alguna duda? <a href="https://wa.me/34611404535" style="color:#FF5C00;font-weight:600;text-decoration:underline;">Escríbenos por WhatsApp</a></p>
+<p style="margin:0;font-size:16px;line-height:26px;color:#333333;">Un saludo.<br><strong style="color:#1F2D3D;">El equipo de Momoven.</strong></p>
+</td></tr>
+
+<tr><td style="padding:28px 40px 36px 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;line-height:17px;color:#666666;border-top:1px solid #E5E5E5;">
+<p style="margin:0 0 10px 0;padding-top:16px;">La ampliación depende de la disponibilidad de la moto en el calendario del propietario.</p>
+<p style="margin:0 0 10px 0;"><strong>ENTIDAD RESPONSABLE:</strong> MOVEMO IBÉRICA, S. L. (MOMOVEN), con domicilio en Calle Marqués de Valverde, nº 8, 1A, 12003 Castellón de la Plana. <strong>FINALIDAD DEL TRATAMIENTO:</strong> Gestión de la ampliación de una reserva de tu moto. <strong>EJERCICIO DE DERECHOS:</strong> info@momoven.com.</p>
+<p style="margin:0 0 10px 0;"><strong>BASE JURÍDICA DEL TRATAMIENTO DE DATOS:</strong> Alta como usuario de nuestra web y ejecución de la relación contractual. <strong>DESTINATARIOS DE SUS DATOS:</strong> No se ceden a terceros salvo por ley. <strong>PROCEDENCIA:</strong> Del propio interesado.</p>
+<p style="margin:0 0 10px 0;"><strong>CONFIDENCIALIDAD:</strong> Este mensaje se dirige exclusivamente a su destinatario. Si lo has recibido por error, avísanos y elimínalo.</p>
+<p style="margin:0 0 10px 0;">Has recibido este email porque tienes una moto publicada en Momoven. Puedes gestionar tus preferencias de comunicación <a href="{{ unsubscribe }}" style="color:#666666;text-decoration:underline;">aquí</a>.</p>
+<p style="margin:0;">© 2026 Momoven</p>
+</td></tr>
+
+</table></td></tr></table>
+</body></html>

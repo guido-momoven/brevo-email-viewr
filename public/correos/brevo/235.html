@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>Sentimos que tu experiencia no fuera la esperada | Momoven</title>
+
+  <!-- Asunto: 😔 Sentimos que tu experiencia no fuera la que esperabas -->
+  <!-- Preencabezado: Queremos compensarte y que nos des otra oportunidad. -->
+
+  <!--
+    ===================================================================
+    PLANTILLA: ENCUESTA DE SATISFACCIÓN · VALORACIÓN NEGATIVA
+    Se envía cuando el cliente marca el atributo FEEDBACK_ALQUILER = "infeliz"
+    (ver atributo de contacto explicado en la guía adjunta).
+
+    CAMPOS QUE FALTAN POR CONFIGURAR EN BREVO ANTES DE ACTIVAR:
+    1. {{ contact.NOMBRE }}                 -> nombre del cliente
+    2. Código SRY20 -> hay que CREAR este código nuevo en el sistema de descuentos
+       (no es el mismo CDIK2 que usan las otras dos plantillas).
+
+    YA CONFIGURADO:
+    - Logo: versión en naranja, alojada en la librería de medios de Brevo
+      (https://cdn.convrrt.com/apps/sendinblue/10745832/2bebf1ed-13b5-453f-8239-e439043dbedb.png).
+      Al ser PNG (no SVG), se ve igual en todos los clientes de correo, incluido
+      Outlook de escritorio.
+    - Código de descuento: SRY20 (fijo en la plantilla). Es un código DISTINTO
+      al CDIK2 que se usa en la solicitud y en la positiva, porque aquí el importe
+      es mayor (ver punto siguiente) y un mismo código no puede valer dos importes
+      distintos en el sistema de reservas.
+    - Importe del descuento: 20€ (más alto que en las otras dos plantillas -15€-,
+      a propósito: es un incentivo mayor para no perder al cliente tras una mala
+      experiencia).
+    - Tipografía: Montserrat (importada por <link> y @import), con Arial/Helvetica
+      como alternativa automática en los clientes que no cargan fuentes web
+      (sobre todo Outlook de escritorio). Ver la guía adjunta para más detalle.
+    - Contacto: en vez de pedir que respondan al correo o escriban a info@momoven.com,
+      hay un botón directo a WhatsApp (https://api.whatsapp.com/send/?phone=34611404535),
+      para una atención más rápida y personal tras una mala experiencia.
+
+    NOTA: esta plantilla NO incluye CTAs de reseña (Google/Trustpilot), a propósito,
+    para no invitar a una valoración pública negativa justo tras una mala experiencia.
+
+    NOTA 2: ya no se muestra el motivo de la insatisfacción como cita textual, porque
+    en la práctica solo se sabe que la valoración fue negativa, sin el detalle del
+    motivo. El primer párrafo ahora es genérico ("tu valoración... no ha sido buena").
+    Si en el futuro se recoge el motivo (atributo MOTIVO_INSATISFACCION), se puede
+    volver a añadir un bloque tipo cita con {{ contact.MOTIVO_INSATISFACCION }}.
+    ===================================================================
+  -->
+
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+
+  <!--[if !mso]><!-->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" type="text/css">
+  <!--<![endif]-->
+
+  <style>
+    @media screen {
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+    }
+    html, body { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+    body { background-color: #1E2326; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { border-collapse: collapse !important; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; }
+    img { display: block; height: auto; border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+    a { text-decoration: none; }
+    a[x-apple-data-detectors], u + #body a, #MessageViewBody a {
+      color: inherit !important; text-decoration: none !important; font-size: inherit !important;
+      font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important;
+    }
+    .preheader { display: none !important; visibility: hidden; overflow: hidden; opacity: 0; color: transparent; width: 0; height: 0; max-width: 0; max-height: 0; mso-hide: all; }
+
+    @media only screen and (max-width: 620px) {
+      .email-shell { width: 100% !important; max-width: 100% !important; }
+      .mobile-pad { padding-right: 20px !important; padding-left: 20px !important; }
+      .hero-title { font-size: 29px !important; line-height: 37px !important; letter-spacing: 0.8px !important; }
+      .code-value { font-size: 25px !important; line-height: 30px !important; letter-spacing: 1.2px !important; }
+      .section-title { font-size: 22px !important; line-height: 30px !important; letter-spacing: 0.8px !important; }
+      .body-copy { font-size: 17px !important; line-height: 27px !important; }
+      .promo-panel { padding: 30px 20px !important; }
+      .detail-panel { padding: 28px 22px !important; }
+      .cta-link { display: block !important; width: auto !important; padding: 18px 16px !important; }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .force-dark { background-color: #1E2326 !important; }
+      .force-orange { background-color: #FF5A00 !important; }
+      .force-white { background-color: #FFFFFF !important; }
+      .dark-text { color: #1E2326 !important; }
+      .light-text { color: #FFFFFF !important; }
+    }
+  </style>
+</head>
+
+<body id="body" style="margin:0; padding:0; background-color:#1E2326;">
+  <div class="preheader" style="display:none; font-size:1px; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">
+    Queremos compensarte y que nos des otra oportunidad.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+
+  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#1E2326" style="width:100%; background-color:#1E2326;">
+    <tr>
+      <td align="center" style="padding:0;">
+        <!--[if mso]>
+        <table role="presentation" width="600" border="0" cellspacing="0" cellpadding="0"><tr><td>
+        <![endif]-->
+
+        <table role="presentation" class="email-shell" width="600" border="0" cellspacing="0" cellpadding="0" style="width:100%; max-width:600px; margin:0 auto;">
+
+          <!-- LOGO -->
+          <tr>
+            <td class="mobile-pad force-dark" align="center" bgcolor="#1E2326" style="padding:28px 32px 20px; background-color:#1E2326;">
+              <a href="https://www.momoven.es/" target="_blank" style="display:inline-block;">
+                <img src="https://cdn.convrrt.com/apps/sendinblue/10745832/2bebf1ed-13b5-453f-8239-e439043dbedb.png" width="160" alt="Momoven" style="width:160px; max-width:160px; height:auto;">
+              </a>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 1 · DISCULPA -->
+          <tr>
+            <td class="mobile-pad force-dark" bgcolor="#1E2326" style="padding:12px 42px 40px; background-color:#1E2326;">
+              <h1 class="hero-title section-title light-text" style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:34px; line-height:42px; font-weight:900; letter-spacing:1.3px; color:#FFFFFF; text-transform:uppercase;">😔 LO SENTIMOS, {{ contact.NOMBRE }}<br><span style="color:#FF5A00;">Queremos hacerlo mejor</span></h1>
+
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:28px;">
+                <tr>
+                  <td width="8" bgcolor="#FF5A00" style="width:8px; background-color:#FF5A00; font-size:0; line-height:0;">&nbsp;</td>
+                  <td style="padding:3px 0 3px 20px;">
+                    <p class="body-copy light-text" style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:28px; color:#D9DDDF;">Hemos visto que tu valoración sobre el último alquiler no ha sido buena, y lo lamentamos de verdad. En Momoven nos tomamos muy en serio cada opinión, y la tuya nos ayuda a mejorar.</p>
+                  </td>
+                </tr>
+              </table>
+
+              <p class="body-copy light-text" style="margin:24px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:28px; color:#D9DDDF;">Nuestro equipo ya está revisando lo ocurrido para que no se repita. Mientras tanto, nos gustaría compensarte.</p>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 2 · CÓDIGO DE DESCUENTO -->
+          <tr>
+            <td class="mobile-pad force-dark" bgcolor="#1E2326" style="padding:0 32px 40px; background-color:#1E2326;">
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FF5A00" style="width:100%; background-color:#FF5A00;">
+                <tr>
+                  <td class="promo-panel" align="center" style="padding:38px 30px 34px; text-align:center;">
+                    <p class="body-copy" style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:20px; line-height:30px; font-weight:700; color:#FFFFFF;">Como disculpa, te regalamos <strong style="color:#1E2326;">20€ de descuento</strong> en tu próxima reserva</p>
+
+                    <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" style="width:100%; margin-top:25px; border-radius:16px; background-color:#FFFFFF;">
+                      <tr>
+                        <td style="padding:17px;">
+                          <p class="code-value" style="margin:0; padding:14px 10px; border-radius:8px; background-color:#1E2326; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:29px; line-height:35px; font-weight:700; letter-spacing:1px; color:#FFFFFF;">Código: <strong>SRY20</strong></p>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:26px;">
+                      <tr>
+                        <td align="center">
+                          <!--[if mso]>
+                          <v:roundrect href="https://www.momoven.es/" style="height:56px;v-text-anchor:middle;width:340px;" arcsize="14%" strokecolor="#1E2326" fillcolor="#1E2326">
+                            <w:anchorlock/>
+                            <center style="color:#FFFFFF;font-family:'Arial Black',Arial,sans-serif;font-size:15px;font-weight:bold;letter-spacing:1px;">USAR MI DESCUENTO</center>
+                          </v:roundrect>
+                          <![endif]-->
+                          <!--[if !mso]><!-->
+                          <a class="cta-link" href="https://www.momoven.es/" target="_blank" style="display:inline-block; padding:18px 30px; border-radius:8px; background-color:#1E2326; color:#FFFFFF; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:22px; font-weight:900; letter-spacing:0.4px; text-align:center; text-transform:uppercase;">Usar mi descuento&nbsp;&nbsp;→</a>
+                          <!--<![endif]-->
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 3 · CONTACTO POR WHATSAPP -->
+          <tr>
+            <td class="mobile-pad force-dark" bgcolor="#1E2326" style="padding:0 32px 48px; background-color:#1E2326;">
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" style="width:100%; border-radius:24px; background-color:#FFFFFF;">
+                <tr>
+                  <td class="detail-panel" align="center" style="padding:34px 32px 36px; text-align:center;">
+                    <p class="body-copy dark-text" style="margin:0 0 24px; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:27px; color:#303437;">Si quieres contarnos más detalles o necesitas que resolvamos algo pendiente de tu alquiler, escríbenos por WhatsApp. Te leemos personalmente.</p>
+
+                    <!--[if mso]>
+                    <v:roundrect href="https://api.whatsapp.com/send/?phone=34611404535" style="height:56px;v-text-anchor:middle;width:300px;" arcsize="14%" strokecolor="#1E2326" fillcolor="#1E2326">
+                      <w:anchorlock/>
+                      <center style="color:#FFFFFF;font-family:'Arial Black',Arial,sans-serif;font-size:15px;font-weight:bold;letter-spacing:1px;">ESCRIBIRNOS POR WHATSAPP</center>
+                    </v:roundrect>
+                    <![endif]-->
+                    <!--[if !mso]><!-->
+                    <a class="cta-link" href="https://api.whatsapp.com/send/?phone=34611404535" target="_blank" style="display:inline-block; padding:18px 30px; border-radius:8px; background-color:#1E2326; color:#FFFFFF; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:17px; line-height:22px; font-weight:900; letter-spacing:0.4px; text-align:center; text-transform:uppercase;">Escribirnos por WhatsApp&nbsp;&nbsp;→</a>
+                    <!--<![endif]-->
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- FOOTER LEGAL -->
+          <tr>
+            <td class="mobile-pad force-dark" bgcolor="#1E2326" style="padding:31px 32px 33px; border-top:1px solid #343B3F; background-color:#1E2326; text-align:left;">
+              <p style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:11px; line-height:17px; color:#ABB2B5;">
+                <strong style="color:#FFFFFF;">ENTIDAD RESPONSABLE:</strong> MOVEMO IBÉRICA, S. L. (MOMOVEN), con domicilio en Carrer Mare de Deu dels Desemparats, Nº 14 de Villarreal (Castellón). <strong style="color:#FFFFFF;">FINALIDAD DEL TRATAMIENTO:</strong> Gestión de la comunicación con los contactos generados por su actividad empresarial. <strong style="color:#FFFFFF;">EJERCICIO DE DERECHOS:</strong> Puede ejercitar sus derechos de acceso, rectificación, supresión, limitación del tratamiento, olvido, portabilidad y oposición dirigiéndose a <a href="mailto:info@momoven.com" style="color:#FF5A00; text-decoration:underline;">info@momoven.com</a>.
+              </p>
+              <p style="margin:13px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:11px; line-height:17px; color:#ABB2B5;">
+                <strong style="color:#FFFFFF;">BASE JURÍDICA DEL TRATAMIENTO DE DATOS:</strong> Alta como usuario de nuestra web, consentimiento y/o solicitud de información. <strong style="color:#FFFFFF;">DESTINATARIOS DE SUS DATOS:</strong> No se cederán datos a terceros, salvo en los supuestos en que lo disponga o permita la ley. <strong style="color:#FFFFFF;">PROCEDENCIA:</strong> Del propio interesado titular de los datos.
+              </p>
+              <p style="margin:13px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:11px; line-height:17px; color:#ABB2B5;">
+                <strong style="color:#FFFFFF;">CONFIDENCIALIDAD:</strong> Este mensaje se dirige exclusivamente a su destinatario y puede contener información privilegiada o confidencial. Si no es usted el destinatario indicado, queda notificado de que la utilización, divulgación y/o copia sin autorización está prohibida en virtud de la legislación vigente. Si ha recibido este mensaje por error, le rogamos que nos lo comunique inmediatamente por esta misma vía y proceda a su destrucción.
+              </p>
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:22px; border-top:1px solid #40474B;">
+                <tr>
+                  <td align="center" style="padding-top:20px;">
+                    <p style="margin:0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:12px; line-height:19px; color:#FFFFFF;">Lo has recibido porque has alquilado con Momoven.</p>
+                    <p style="margin:8px 0 0; font-family:'Montserrat',Arial,Helvetica,sans-serif; font-size:12px; line-height:19px; color:#ABB2B5;">
+                      Si no quieres recibir más nuestros correos,
+                      <a href="{{ unsubscribe }}" style="color:#FF5A00; font-weight:700; text-decoration:underline;">date de baja aquí</a>.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+
+        <!--[if mso]>
+        </td></tr></table>
+        <![endif]-->
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

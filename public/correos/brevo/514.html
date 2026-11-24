@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fotos de anuncios para revisar</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:Arial,Helvetica,sans-serif;color:#1f2937;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+        <table role="presentation" width="640" cellpadding="0" cellspacing="0" style="max-width:640px;width:100%;background:#ffffff;border-radius:8px;">
+
+          <!-- Cabecera -->
+          <tr>
+            <td style="padding:24px 24px 8px 24px;">
+              <h1 style="margin:0;font-size:20px;line-height:28px;color:#111827;">
+                Fotos de anuncios para revisar: {{ params.total }}
+              </h1>
+              <p style="margin:12px 0 0 0;font-size:14px;line-height:21px;color:#4b5563;">
+                La revisión automática ha encontrado {{ params.total }} foto(s) de anuncios que no parecen
+                de una moto o llevan marca de agua. Revisa cada una y, si hace falta, desactiva la moto desde el admin.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Una ficha por foto -->
+          {% for foto in params.fotos %}
+          <tr>
+            <td style="padding:16px 24px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:8px;">
+                <tr>
+                  <td width="220" valign="top" style="padding:12px;">
+                    <a href="{{ foto.url_foto }}">
+                      <img src="{{ foto.url_foto }}" width="200" alt="Foto de la moto {{ foto.id_moto }}"
+                           style="display:block;width:200px;max-width:100%;height:auto;border-radius:6px;border:0;">
+                    </a>
+                  </td>
+                  <td valign="top" style="padding:12px 12px 12px 0;font-size:14px;line-height:21px;">
+                    <p style="margin:0 0 4px 0;font-size:16px;font-weight:bold;color:#111827;">
+                      Moto {{ foto.id_moto }}
+                    </p>
+                    <p style="margin:0 0 8px 0;color:#4b5563;">
+                      {{ foto.anuncio }} · {{ foto.estado }}
+                    </p>
+                    <p style="margin:0 0 8px 0;font-weight:bold;color:#b91c1c;">
+                      {{ foto.motivo }}
+                    </p>
+                    <p style="margin:0 0 12px 0;color:#374151;">
+                      <span style="color:#6b7280;">La IA ve:</span> {{ foto.que_se_ve }}
+                    </p>
+                    <a href="{{ foto.url_admin }}"
+                       style="display:inline-block;padding:8px 14px;background:#111827;color:#ffffff;text-decoration:none;border-radius:6px;font-size:13px;font-weight:bold;">
+                      Abrir la moto en el admin
+                    </a>
+                    <a href="{{ foto.url_foto }}"
+                       style="display:inline-block;margin-left:8px;padding:8px 0;color:#2563eb;font-size:13px;">
+                      Ver foto
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {% endfor %}
+
+          <!-- Pie -->
+          <tr>
+            <td style="padding:8px 24px 24px 24px;">
+              <p style="margin:0;font-size:12px;line-height:18px;color:#9ca3af;">
+                Aviso automático de la revisión de fotos (MMV-7470). Solo avisa: no desactiva nada.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

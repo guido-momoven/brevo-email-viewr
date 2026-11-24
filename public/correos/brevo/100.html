@@ -1,0 +1,15 @@
+<html><body><h1>Hola {{ params.nombre }}, mira estas motos</h1>
+
+{% for moto in params.motos %}
+  <div style="border:1px solid #ddd; padding:12px; margin:10px 0;">
+    <img src="{{ moto.imagen_url }}" width="200" />
+    <h3>{{ moto.marca }} {{ moto.modelo }}</h3>
+    <p>{{ moto.ciudad }} · {{ moto.precio_dia }}€/día</p>
+    <a href="{{ moto.url_ficha }}">Ver moto</a>
+  </div>
+{% endfor %}<div style="max-width:600px;margin:0 auto;padding:8px 24px 24px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="#FF5C00" style="background-color:#FF5C00;border-radius:14px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;"><div style="padding:28px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<p style="margin:0 0 10px 0;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:#262626;">App Momoven</p>
+<p style="margin:0 0 6px 0;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:24px;font-weight:800;line-height:1.2;color:#FFFFFF;">Tu moto, a un toque en la app</p>
+<p style="margin:0 0 20px 0;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;font-weight:400;line-height:1.5;color:#262626;">Consulta tu alquiler y recibe los avisos en el móvil.</p>
+<div style="font-size:0;line-height:0;"><a href="https://apps.apple.com/app/apple-store/id6809725555?pt=125080089&amp;ct=app26_tx_rider&amp;mt=8" target="_blank" style="display:inline-block;margin:0 12px 12px 0;"><img src="https://img.mailinblue.com/10745832/images/content_library/original/6aff0a304fdcaa2475c129d9.png" width="150" height="50" alt="Consíguelo en el App Store" style="display:block;border:0;width:150px;height:50px;"></a><a href="https://play.google.com/store/apps/details?id=com.momoven.android&amp;referrer=utm_source%3Dbrevo%26utm_medium%3Demail%26utm_campaign%3Dapp26%26utm_content%3Dtx_rider" target="_blank" style="display:inline-block;margin:0 0 12px 0;"><img src="https://img.mailinblue.com/10745832/images/content_library/original/6aff0a304fdcaa2475c129da.png" width="168" height="50" alt="Disponible en Google Play" style="display:block;border:0;width:168px;height:50px;"></a></div>
+</div></td></tr></table></div></body></html>

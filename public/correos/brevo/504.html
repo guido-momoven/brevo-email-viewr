@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>EXT26 · Recordatorio r2</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet"></head>
+<body style="margin:0;padding:0;background-color:#FFFFFF;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;color:#333333;">
+<div style="display:none;max-height:0;overflow:hidden;">{% if contact.LANGUAGE == "en" or contact.LANGUAGE == "EN" %}You can extend up to 24 hours before the end of your trip.{% else %}Puedes ampliar hasta 24 horas antes del final de tu viaje.{% endif %}</div>
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td align="center">
+<table role="presentation" width="600" border="0" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background-color:#FFFFFF;">
+<tr><td style="padding:32px 40px 0 40px;"><img src="https://cdn.convrrt.com/apps/sendinblue/10745832/87abf61c-2418-4659-8d2a-007feb47bd1b.svg" width="150" alt="Momoven" style="display:block;width:150px;height:auto;border:0;"></td></tr>
+<tr><td style="padding:24px 40px 0 40px;">
+{% if contact.LANGUAGE == "en" or contact.LANGUAGE == "EN" %}
+<h1 style="margin:0 0 16px 0;font-size:28px;line-height:36px;font-weight:800;color:#1F2D3D;">Want to get a few extra days?</h1>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;">Hi{% if contact.NOMBRE %}, {{ contact.NOMBRE }}{% endif %}.</p>
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:2px solid #FF5C00;border-radius:12px;"><tr><td style="padding:22px 24px;">
+<span style="display:inline-block;background-color:#FF5C00;color:#FFFFFF;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 11px;border-radius:20px;">NEW FEATURE</span>
+<p style="margin:12px 0 6px 0;font-size:40px;line-height:46px;font-weight:800;color:#FF5C00;letter-spacing:-1px;">You can extend up to 24 hours before the end</p>
+<p style="margin:0 0 6px 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Extend your rental without returning the bike.</p>
+<p style="margin:0 0 6px 0;font-size:15px;line-height:23px;color:#333333;">Your rental ends {{ contact.CURRENT_BOOKING_END }}{% if contact.CURRENT_BOOKING_END_HOUR %} at {{ contact.CURRENT_BOOKING_END_HOUR }}{% endif %}.</p>
+{% if contact.CURRENT_MOTO %}<p style="margin:0 0 6px 0;font-size:15px;line-height:23px;color:#333333;">Bike: {{ contact.CURRENT_MOTO }}</p>{% endif %}
+{% if contact.CURRENT_BOOKING_TYPE == "IB" %}<p style="margin:0;font-size:15px;line-height:23px;color:#333333;"><strong style="color:#1F2D3D;">Instant booking:</strong> if the bike is free, the extension is confirmed right away.</p>{% else %}<p style="margin:0;font-size:15px;line-height:23px;color:#333333;"><strong style="color:#1F2D3D;">Owner approval:</strong> the owner accepts or declines, and your dates do not change in the meantime.</p>{% endif %}
+</td></tr></table>
+<div style="margin:24px 0 0 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">How it works</div>
+<p style="margin:8px 0 6px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">1.</strong> Go to your booking.</p>
+<p style="margin:0 0 6px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">2.</strong> Tap «Extend».</p>
+<p style="margin:0 0 16px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">3.</strong> Choose the new days.</p>
+<p style="margin:0 0 16px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#1F2D3D;">Deadline:</strong> request it at least 24 hours before the end of your rental.</p>
+<div style="background-color:#111111;border-radius:10px;padding:18px 22px;margin:0 0 24px 0;font-size:15px;line-height:23px;color:#FFFFFF;"><strong style="color:#FFFFFF;">Black Friday discount:</strong> if you have not used it yet, it also applies to your extension. Only until 30/11.</div>
+<table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td bgcolor="#FF5C00" style="background-color:#FF5C00;border-radius:8px;"><a href="https://www.momoven.es/cuenta-alquileres?utm_source=brevo&utm_medium=email&utm_campaign=ext26&utm_content=r2" target="_blank" style="display:inline-block;padding:14px 30px;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:8px;">Extend my rental</a></td></tr></table>
+{% else %}
+<h1 style="margin:0 0 16px 0;font-size:28px;line-height:36px;font-weight:800;color:#1F2D3D;">¿Quieres darle una vuelta extra?</h1>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;">Hola{% if contact.NOMBRE %}, {{ contact.NOMBRE }}{% endif %}.</p>
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:2px solid #FF5C00;border-radius:12px;"><tr><td style="padding:22px 24px;">
+<span style="display:inline-block;background-color:#FF5C00;color:#FFFFFF;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 11px;border-radius:20px;">NUEVA FUNCIONALIDAD</span>
+<p style="margin:12px 0 6px 0;font-size:40px;line-height:46px;font-weight:800;color:#FF5C00;letter-spacing:-1px;">Puedes ampliar hasta 24 h antes del final</p>
+<p style="margin:0 0 6px 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Extiende tu alquiler sin devolver la moto.</p>
+<p style="margin:0 0 6px 0;font-size:15px;line-height:23px;color:#333333;">Tu alquiler termina el {{ contact.CURRENT_BOOKING_END }}{% if contact.CURRENT_BOOKING_END_HOUR %} a las {{ contact.CURRENT_BOOKING_END_HOUR }}{% endif %}.</p>
+{% if contact.CURRENT_MOTO %}<p style="margin:0 0 6px 0;font-size:15px;line-height:23px;color:#333333;">Moto: {{ contact.CURRENT_MOTO }}</p>{% endif %}
+{% if contact.CURRENT_BOOKING_TYPE == "IB" %}<p style="margin:0;font-size:15px;line-height:23px;color:#333333;"><strong style="color:#1F2D3D;">Reserva inmediata:</strong> si la moto está libre, la ampliación se confirma y se cobra al momento.</p>{% else %}<p style="margin:0;font-size:15px;line-height:23px;color:#333333;"><strong style="color:#1F2D3D;">Bajo aceptación:</strong> el propietario decide, y tus fechas no cambian mientras tanto.</p>{% endif %}
+</td></tr></table>
+<div style="margin:24px 0 0 0;font-size:17px;line-height:24px;font-weight:700;color:#1F2D3D;">Cómo funciona</div>
+<p style="margin:8px 0 6px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">1.</strong> Entra en tu reserva.</p>
+<p style="margin:0 0 6px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">2.</strong> Pulsa «Ampliar».</p>
+<p style="margin:0 0 16px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#FF5C00;">3.</strong> Elige los nuevos días.</p>
+<p style="margin:0 0 16px 0;font-size:15px;line-height:24px;color:#333333;"><strong style="color:#1F2D3D;">Plazo:</strong> pídelo al menos 24 horas antes del final de tu alquiler.</p>
+<div style="background-color:#111111;border-radius:10px;padding:18px 22px;margin:0 0 24px 0;font-size:15px;line-height:23px;color:#FFFFFF;"><strong style="color:#FFFFFF;">Descuento de Black Friday:</strong> si aún no lo has usado, también vale para tu ampliación. Solo hasta el 30/11.</div>
+<table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td bgcolor="#FF5C00" style="background-color:#FF5C00;border-radius:8px;"><a href="https://www.momoven.es/cuenta-alquileres?utm_source=brevo&utm_medium=email&utm_campaign=ext26&utm_content=r2" target="_blank" style="display:inline-block;padding:14px 30px;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:8px;">Extender mi alquiler</a></td></tr></table>
+{% endif %}
+</td></tr>
+<tr><td style="padding:28px 40px 36px 40px;font-size:11px;line-height:17px;color:#666666;border-top:1px solid #E5E5E5;">
+<p style="margin:0 0 10px 0;"><strong>ENTIDAD RESPONSABLE:</strong> MOVEMO IBÉRICA, S. L. (MOMOVEN), con domicilio en Calle Marqués de Valverde, nº 8, 1A, 12003 Castellón de la Plana. <strong>EJERCICIO DE DERECHOS:</strong> info@momoven.com.</p>
+<p style="margin:0 0 10px 0;">Puedes gestionar tus preferencias de comunicación <a href="{{ unsubscribe }}" style="color:#666666;text-decoration:underline;">aquí</a>.</p>
+<p style="margin:0;">© 2026 Momoven</p>
+</td></tr>
+</table></td></tr></table>
+</body></html>

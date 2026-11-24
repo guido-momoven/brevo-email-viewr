@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>Ampliación confirmada</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;padding:0;width:100%!important;background-color:#FFFFFF;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+table{border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;}
+img{border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;display:block;}
+a{color:#FF5C00;}
+.preheader{display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;max-height:0;max-width:0;overflow:hidden;mso-hide:all;}
+@media only screen and (max-width:620px){
+.email-shell{width:100%!important;}
+.px{padding-left:24px!important;padding-right:24px!important;}
+.h1{font-size:24px!important;line-height:32px!important;}
+.stack-col{display:block!important;width:100%!important;}
+.detail-label{padding-bottom:4px!important;}
+}
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#FFFFFF;">
+<div class="preheader">Tu ampliación está pagada y confirmada. Revisa las nuevas fechas de tu alquiler.</div>
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="background-color:#FFFFFF;">
+<tr>
+<td align="center" style="padding:0;">
+<table role="presentation" class="email-shell" width="600" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="width:600px;max-width:600px;background-color:#FFFFFF;">
+
+<tr>
+<td class="px" align="left" style="padding:32px 40px 8px 40px;">
+<a href="https://www.momoven.es/?utm_source=brevo&utm_medium=email&utm_campaign=Extensin%20Alquiler%20-%203&utm_id=369" target="_blank" style="text-decoration:none;"><img src="https://cdn.convrrt.com/apps/sendinblue/10745832/87abf61c-2418-4659-8d2a-007feb47bd1b.svg" width="150" alt="Momoven" style="width:150px;height:auto;"></a>
+</td>
+</tr>
+
+<tr>
+<td class="px" align="left" style="padding:28px 40px 0 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<h1 class="h1" style="margin:0 0 20px 0;font-size:28px;line-height:36px;font-weight:800;color:#1A1A1A;">¡Tu ampliación está confirmada!</h1>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;">Hola, {{ params.nombreCliente }}.</p>
+<p style="margin:0 0 16px 0;font-size:16px;line-height:26px;color:#333333;">El pago se ha realizado correctamente y la ampliación de tu alquiler de la <strong style="color:#1A1A1A;">{{ params.modeloMoto }}</strong> ya está confirmada. Tienes más tiempo para seguir rodando.</p>
+</td>
+</tr>
+
+<tr>
+<td class="px" style="padding:16px 40px 0 40px;">
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="border:1px solid #CCCCCC;border-radius:10px;">
+<tr>
+<td style="padding:24px 24px 4px 24px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<p style="margin:0 0 18px 0;font-size:17px;line-height:24px;font-weight:700;color:#1A1A1A;">Detalles de la ampliación</p>
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td class="stack-col detail-label" width="45%" valign="top" style="padding:0 0 18px 0;font-size:15px;line-height:22px;color:#333333;">Moto</td>
+<td class="stack-col" width="55%" valign="top" style="padding:0 0 18px 0;font-size:15px;line-height:22px;font-weight:700;color:#1A1A1A;">{{ params.modeloMoto }}</td>
+</tr>
+<tr>
+<td class="stack-col detail-label" width="45%" valign="top" style="padding:0 0 18px 0;font-size:15px;line-height:22px;color:#333333;">Inicio de la ampliación</td>
+<td class="stack-col" width="55%" valign="top" style="padding:0 0 18px 0;font-size:15px;line-height:22px;font-weight:700;color:#1A1A1A;">{{ params.fechaInicio }} · {{ params.horaInicio }}</td>
+</tr>
+<tr>
+<td class="stack-col detail-label" width="45%" valign="top" style="padding:0 0 18px 0;font-size:15px;line-height:22px;color:#333333;">Fin de la ampliación</td>
+<td class="stack-col" width="55%" valign="top" style="padding:0 0 18px 0;font-size:15px;line-height:22px;font-weight:700;color:#1A1A1A;">{{ params.fechaFin }} · {{ params.horaFin }}</td>
+</tr>
+<tr>
+<td class="stack-col detail-label" width="45%" valign="top" style="padding:0 0 18px 0;font-size:15px;line-height:22px;color:#333333;">Importe pagado</td>
+<td class="stack-col" width="55%" valign="top" style="padding:0 0 18px 0;font-size:15px;line-height:22px;font-weight:700;color:#1A1A1A;">{{ params.importe }}</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td class="px" style="padding:24px 40px 0 40px;">
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFF8F2" style="background-color:#FFF8F2;border:1px dashed #FFD9BE;border-radius:10px;">
+<tr>
+<td style="padding:18px 22px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:23px;color:#333333;">
+✅ <strong style="color:#1A1A1A;">Recuerda devolver la moto en la nueva fecha y hora de fin.</strong> Una devolución tardía sin aviso puede generar cargos adicionales.
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td class="px" align="left" style="padding:28px 40px 0 40px;">
+<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td align="center" bgcolor="#FF5C00" style="background-color:#FF5C00;border-radius:8px;">
+<a href="{{ params.urlAlquiler }}?utm_source=brevo&utm_medium=email&utm_campaign=Extensin%20Alquiler%20-%203&utm_id=369" target="_blank" style="display:inline-block;padding:14px 30px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;line-height:20px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:8px;">Ver mi alquiler</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td class="px" align="left" style="padding:28px 40px 0 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<p style="margin:0 0 20px 0;font-size:14px;line-height:22px;color:#767676;">¿Tienes alguna duda? <a href="https://wa.me/34611404535?text=Hola%2C%20tengo%20una%20duda%20sobre%20la%20ampliaci%C3%B3n%20de%20mi%20alquiler&utm_source=brevo&utm_medium=email&utm_campaign=Extensin%20Alquiler%20-%203&utm_id=369" target="_blank" style="color:#FF5C00;font-weight:600;text-decoration:underline;">Escríbenos por WhatsApp</a></p>
+<p style="margin:0;font-size:16px;line-height:26px;color:#333333;">Un saludo,<br><strong style="color:#1A1A1A;">El equipo de Momoven.</strong></p>
+</td>
+</tr>
+
+<tr><td align="center"><div style="height:36px;line-height:36px;font-size:0;">&nbsp;</div><div style="padding:0 40px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="#FF5C00" style="background-color:#FF5C00;border-radius:14px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;"><div style="padding:28px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;">
+<p style="margin:0 0 10px 0;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:#262626;">App Momoven</p>
+<p style="margin:0 0 6px 0;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:24px;font-weight:800;line-height:1.2;color:#FFFFFF;">Tu próxima moto, con un 5 % menos desde la app</p>
+<p style="margin:0 0 20px 0;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;font-weight:400;line-height:1.5;color:#262626;">Reserva en un toque y recibe la confirmación en el móvil.</p>
+<div style="font-size:0;line-height:0;"><a href="https://apps.apple.com/app/apple-store/id6809725555?pt=125080089&amp;ct=app26_t3&amp;mt=8" target="_blank" style="display:inline-block;margin:0 12px 12px 0;"><img src="https://img.mailinblue.com/10745832/images/content_library/original/6aff0a304fdcaa2475c129d9.png" width="150" height="50" alt="Consíguelo en el App Store" style="display:block;border:0;width:150px;height:50px;"></a><a href="https://play.google.com/store/apps/details?id=com.momoven.android&amp;referrer=utm_source%3Dbrevo%26utm_medium%3Demail%26utm_campaign%3Dapp26%26utm_content%3Dt3" target="_blank" style="display:inline-block;margin:0 0 12px 0;"><img src="https://img.mailinblue.com/10745832/images/content_library/original/6aff0a304fdcaa2475c129da.png" width="168" height="50" alt="Disponible en Google Play" style="display:block;border:0;width:168px;height:50px;"></a></div>
+<p style="margin:14px 0 0 0;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:1.5;color:#262626;">Descuento del 5 % en el alquiler de motos desde la app, del 23 de noviembre al 31 de diciembre de 2026, no acumulable a otras ofertas. <a href="https://campaign.momoven.com/app-terminos-y-condiciones" target="_blank" style="color:#262626;text-decoration:underline;">Ver condiciones</a>.</p></div></td></tr></table></div><div style="height:44px;line-height:44px;font-size:0;">&nbsp;</div></td></tr>
+<tr>
+<td align="center" style="padding:36px 40px 8px 40px;">
+<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td style="padding:0 6px;"><a href="https://www.facebook.com/momoven.es?utm_source=brevo&utm_medium=email&utm_campaign=Extensin%20Alquiler%20-%203&utm_id=369" target="_blank"><img src="https://creative-assets.mailinblue.com/editor/social-icons/rounded_colored/facebook_32px.png" width="32" height="32" alt="Facebook"></a></td>
+<td style="padding:0 6px;"><a href="https://www.instagram.com/momoven?utm_source=brevo&utm_medium=email&utm_campaign=Extensin%20Alquiler%20-%203&utm_id=369" target="_blank"><img src="https://creative-assets.mailinblue.com/editor/social-icons/rounded_colored/instagram_32px.png" width="32" height="32" alt="Instagram"></a></td>
+<td style="padding:0 6px;"><a href="https://www.linkedin.com/company/momoven?originalSubdomain=es&utm_source=brevo&utm_medium=email&utm_campaign=Extensin%20Alquiler%20-%203&utm_id=369" target="_blank"><img src="https://creative-assets.mailinblue.com/editor/social-icons/rounded_colored/linkedin_32px.png" width="32" height="32" alt="LinkedIn"></a></td>
+<td style="padding:0 6px;"><a href="https://www.tiktok.com/@momoven.com?utm_source=brevo&utm_medium=email&utm_campaign=Extensin%20Alquiler%20-%203&utm_id=369" target="_blank"><img src="https://creative-assets.mailinblue.com/editor/social-icons/rounded_colored/tiktok_32px.png" width="32" height="32" alt="TikTok"></a></td>
+<td style="padding:0 6px;"><a href="https://www.youtube.com/@momoventv?utm_source=brevo&utm_medium=email&utm_campaign=Extensin%20Alquiler%20-%203&utm_id=369" target="_blank"><img src="https://creative-assets.mailinblue.com/editor/social-icons/rounded_colored/youtube_32px.png" width="32" height="32" alt="YouTube"></a></td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td class="px" style="padding:20px 40px 36px 40px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;line-height:17px;color:#666666;">
+<p style="margin:0 0 10px 0;"><strong>ENTIDAD RESPONSABLE:</strong> MOVEMO IBÉRICA, S. L. (MOMOVEN), con domicilio en Calle Marqués de Valverde, nº 8, 1A, 12003 Castellón de la Plana. <strong>FINALIDAD DEL TRATAMIENTO:</strong> Gestión de la ampliación de tu alquiler. <strong>EJERCICIO DE DERECHOS:</strong> Puede ejercitar sus derechos de acceso, rectificación, supresión, limitación del tratamiento, olvido, portabilidad y oposición dirigiéndose a info@momoven.com.</p>
+<p style="margin:0 0 10px 0;"><strong>BASE JURÍDICA DEL TRATAMIENTO DE DATOS:</strong> Alta como usuario de nuestra web, consentimiento y/o solicitud de información. <strong>DESTINATARIOS DE SUS DATOS:</strong> No se cederán datos a terceros, salvo en los supuestos en que lo disponga o permita la ley. <strong>PROCEDENCIA:</strong> Del propio interesado titular de los datos.</p>
+<p style="margin:0 0 16px 0;"><strong>CONFIDENCIALIDAD:</strong> Este mensaje se dirige exclusivamente a su destinatario y puede contener información privilegiada o confidencial. Si no es usted el destinatario indicado, queda notificado de que la utilización, divulgación y/o copia sin autorización está prohibida en virtud de la legislación vigente. Si ha recibido este mensaje por error, le rogamos que nos lo comunique inmediatamente por esta misma vía y proceda a su destrucción.</p>
+<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td style="border-top:1px solid #E5E5E5;padding-top:16px;font-family:'Montserrat','Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;line-height:17px;color:#999999;">
+<p style="margin:0 0 6px 0;">Has recibido este email porque se ha confirmado la ampliación de tu alquiler en Momoven.</p>
+<p style="margin:0;">© 2026 Momoven</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

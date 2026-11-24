@@ -1,0 +1,7 @@
+[
+  {"id":"bienvenida-dia0","titulo":"Bienvenida · día 0","archivo":"bienvenida-dia0.html","asunto":"Ya tienes Momoven en el bolsillo","nota":"Un solo correo con bloques y cabecera según el tipo de usuario. Plantilla de Brevo 515."},
+  {"id":"propietarios-d2","titulo":"Propietarios · día 2","archivo":"propietarios-d2.html","asunto":"Activa las notificaciones para enterarte de cada solicitud","nota":"Se envía si PUSH_ENABLED no es verdadero. Plantilla de Brevo 516."},
+  {"id":"propietarios-d5","titulo":"Propietarios · día 5","archivo":"propietarios-d5.html","asunto":"Las solicitudes caducan si no las contestas a tiempo","nota":"Se envía si PUSH_ENABLED no es verdadero. Plantilla de Brevo 517."},
+  {"id":"riders-d2","titulo":"Riders · día 2","archivo":"riders-d2.html","asunto":"Tu primera moto desde la app","nota":"Se envía si no ha hecho ninguna solicitud desde que instaló. Plantilla de Brevo 518."},
+  {"id":"riders-d5","titulo":"Riders · día 5","archivo":"riders-d5.html","asunto":"Alquila con un 5 % menos hasta el 31 de diciembre","nota":"Se envía si no ha hecho ninguna solicitud desde que instaló. Plantilla de Brevo 519."}
+]
