@@ -19,6 +19,7 @@ const crypto = require('crypto');
 
 const BREVO = 'https://api.brevo.com/v3';
 const PERMITIDOS = [
+  'NOMBRE', // ampliado en la copia de equipo: el visor necesita el nombre para la vista previa (decisión de Nico)
   'LANGUAGE', 'TIPO_USUARIO', 'LIFECYCLE_STAGE',
   'HOST_HAS_IB', 'HOST_HAS_RTB', 'CURRENT_BOOKING_STATUS', 'CURRENT_BOOKING_START', 'CURRENT_BOOKING_END',
   'SEARCH_STATUS', 'SEARCH_STEP', 'SEARCH_STRATEGY', 'SEARCH_AUDIENCE', 'SEARCH_CITY', 'SEARCH_DAYS_TO_TRIP',
